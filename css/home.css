@@ -32,3 +32,13 @@
 
   background-color: green;
 }
+
+#barang {
+    border : solid 1px black;
+    margin-top : 20px;
+}
+
+#barang .grid_4{
+    border : solid 1px black;
+    margin : 10px;
+}
