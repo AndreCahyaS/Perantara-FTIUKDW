@@ -6,6 +6,7 @@
                 <script type="text/javascript" src="jquery-1.10.2.js"></script>
                 <link rel="stylesheet" href="css\960_24_col.css" type="text/css"/>
                 <link rel="stylesheet" href="css\hasil-pencarian.css" type="text/css"/>
+                <link rel="stylesheet" href="css\headerfooter.css" type="text/css"/>
                 <meta charset="utf-8">
                 
         </head>
@@ -18,12 +19,15 @@
                         <a href="home.html">SEMENTARA<img src="banner.jpeg" height="300" width="600"></a>
                     </div>
 
-                    <form id="login" method="POST" class="grid_5">
-                        <label for="username">username</label><input type="text" name="username" class="placeholder" placeholder="Akun Pengguna"><br/>
-                        <label for="password">password</label><input type="password" name="password" class="placeholder" placeholder="Kata Sandi"><br/>
-                        <input type="submit" value="Masuk">
-                        <input type="submit" value="Daftar?">
-                    </form> 
+                    <div id="masuk" class="grid_5">
+
+                        <form id="login" method="POST">
+                            <label for="username">username</label><input type="text" name="username" class="placeholder" placeholder="Akun Pengguna"><br/>
+                            <label for="password">password</label><input type="password" name="password" class="placeholder" placeholder="Kata Sandi"><br/>
+                            <input type="submit" value="Masuk">
+                            <input type="submit" value="Daftar?">
+                        </form> 
+                    </div>
                 </div>
 
                   
@@ -31,8 +35,7 @@
                     <div id="pencarian" class="grid_18">
                        <form id="cari" method="GET" action="hasil-pencarian.html">
                         
-                          <input  type="text"  placeholder="Kata Pencarian" autocomplete="off" name="search"
-                          <?php if($_GET[search])echo "value=$_GET[search]"; ?>/>
+                          <input  type="text"  placeholder="Kata Pencarian" autocomplete="off" name="search"/>
                         
                           <input type="submit" value="Cari" class="button2">
                         
