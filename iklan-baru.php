@@ -3,9 +3,9 @@
         <head>
                   
                 <script type="text/javascript" src="jquery-1.10.2.js"></script>
-                <link rel="stylesheet" href="css\960_24_col.css" type="text/css"/>
-                <link rel="stylesheet" href="css\iklan-baru.css" type="text/css"/>
-                <link rel="stylesheet" href="css\headerfooter.css" type="text/css"/>
+                <link rel="stylesheet" href="css/960_24_col.css" type="text/css"/>
+                <link rel="stylesheet" href="css/iklan-baru.css" type="text/css"/>
+                <link rel="stylesheet" href="css/headerfooter.css" type="text/css"/>
                 <meta charset="utf-8">
 
         </head>

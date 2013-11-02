@@ -2,15 +2,16 @@
     include("koneksi.php");
     //masukkan ke data base form sign up
     //cek dulu apa ada data yang dikirim
-    if(isset($_POST['kata']) && isset($_POST['alay']) && isset($_POST['vicky']) && isset($_POST['arti']) ){
-        //disini lakukan proses insert ke database
-        $kata = $_POST['kata'];
-        $alay = $_POST['alay'];
-        $vicky = $_POST['vicky'];
-        $arti = $_POST['arti'];
+
+    if (isset($_POST['username']) && isset($_POST['nama']) && isset($_POST['email']) && isset($_POST['password']) ){
+       $username = $_POST['username'];
+       $nama = $_POST['nama'];
+       $email = $_POST['email'];
+       $password = $_POST['password'];
+       $query = "INSERT INTO `perantara`.`user` (`id` ,`username` ,`nama` ,`email` ,`password` ,`joindate`)VALUES (NULL,  '".$username."',  
+        '".$nama."',  '".$email."',  '".$password."', CURRENT_TIMESTAMP)";
 
 
-        $query = "INSERT INTO `kamus` (`id` ,`kata` ,`alay` ,`vicky` ,`arti`) VALUES (NULL,  '".$kata."',  '".$alay."',  '".$vicky."',  '".$arti."')";
         $res = mysql_query($query) or die("gagal Query disini");
 
         if($res) echo "Berhasil ditambah";
@@ -20,18 +21,19 @@
     else {
         echo "Isi semua";
     }
+    
 ?>
 
 <!DOCTYPE html>
-
+<html>
         <head>
                
         
                 <script type="text/javascript" src="jquery-1.10.2.js"></script>
-                <link rel="stylesheet" href="css\960_24_col.css" type="text/css"/>
-                <link rel="stylesheet" href="css\home.css" type="text/css"/>
-                <link rel="stylesheet" href="css\headerfooter.css" type="text/css"/>
-                <link rel="stylesheet" href="css\register.css" type="text/css"/>
+                <link rel="stylesheet" href="css/960_24_col.css" type="text/css"/>
+                <link rel="stylesheet" href="css/home.css" type="text/css"/>
+                <link rel="stylesheet" href="css/headerfooter.css" type="text/css"/>
+                <link rel="stylesheet" href="css/register.css" type="text/css"/>
                 <meta charset="utf-8">
 
         </head>
@@ -65,8 +67,8 @@
                   
                   <div id="content" class="grid_24">
                     
-                    <form id="daftar" a> 
-                        <div id="kiri" class="grid_17" action="register.php">
+                    <form id="daftar" method="POST" class="grid_17" action="register.php"> 
+                        <div id="kiri" >
 
                         <table>                
                         <tr>
@@ -97,7 +99,7 @@
                                                 
                                                <tr>
                                                   <td> 
-                                                <input type="submit" value="Masuk"></td>
+                                                <input type="submit" value="Tambah"></td>
                                                   </tr>
                                       </table>             
                                         </form>
