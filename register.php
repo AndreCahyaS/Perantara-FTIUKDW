@@ -8,7 +8,7 @@
        $nama = $_POST['nama'];
        $email = $_POST['email'];
        $password = $_POST['password'];
-       $query = "INSERT INTO `perantara`.`user` (`id` ,`username` ,`nama` ,`email` ,`password` ,`joindate`)VALUES (NULL,  '".$username."',  
+       $query = "INSERT INTO `perantara`.`user` (`user_id` ,`username` ,`nama` ,`email` ,`password` ,`joindate`)VALUES (NULL,  '".$username."',  
         '".$nama."',  '".$email."',  '".$password."', CURRENT_TIMESTAMP)";
 
 
