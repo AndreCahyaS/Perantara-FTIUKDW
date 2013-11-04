@@ -21,7 +21,7 @@
     else {
         echo "Isi semua";
     }
-    
+    mysql_close($koneksi);
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +53,7 @@
                                                 <label for="username">username</label><input type="text" name="username" class="placeholder" placeholder="Akun Pengguna"><br/>
                                                 <label for="password">password</label><input type="password" name="password" class="placeholder" placeholder="Kata Sandi"><br/>
                                                 <input type="submit" value="Masuk">
-                                                <input type="submit" value="Daftar?">
+                                  
                                         </form>
     
 
