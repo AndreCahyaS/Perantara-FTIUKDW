@@ -18,7 +18,7 @@
                         <a href="home.html">SEMENTARA<img src="banner.jpeg" height="300" width="600"></a>
                     </div>
 
-                    <form id="login" method="POST" class="grid_5">
+                    <form id="login" method="POST" class="grid_5" action="login.php">
                         <label for="username">username</label><input type="text" name="username" class="placeholder" placeholder="Akun Pengguna"><br/>
                         <label for="password">password</label><input type="password" name="password" class="placeholder" placeholder="Kata Sandi"><br/>
                         <input type="submit" value="Masuk">
