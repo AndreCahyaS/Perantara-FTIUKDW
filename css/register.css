@@ -4,3 +4,7 @@
 	margin : 5px;
 	height : 20px;
 }
+#footer {
+	clear: both;
+	float: right;
+}

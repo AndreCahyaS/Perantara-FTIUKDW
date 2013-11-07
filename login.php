@@ -11,15 +11,14 @@
 	$hasil = mysql_query($query) or die("Gagal query");
 
 	if(mysql_num_rows($hasil) > 0) {
+					
+		sleep(2);//seconds to wait..
 		echo "Login berhasil, selamat datang ".$username;
-		echo '
-	<script type="text/javascript">
-		function delayer(){
-			window.location.href = "https://www.google.com"
-		}
-		window.setTimeout("delayer()",5000);
-	</script>
-			 ';
+		session_start();
+					$_SESSION['user'] = $username;
+			
+			header("Location:".$_SERVER['HTTP_REFERER']."");
+			
 	}
 	else {
 		echo "Login gagal, username atau password anda salah <br>";

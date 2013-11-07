@@ -20,14 +20,26 @@
                       </div>
 
                           <div id="masuk" class="grid_5">
-                                 
-                          
+                                 <?php
+                                    session_start();
+                                    if(isset($_SESSION['user']))
+                                     {
+                                        $username = $_SESSION['user'];
+                                        echo "Hello , " .$username;
+                                 ?>
+                                 <a href="logout.php"> <button>Logout</button></a>
+                                <?php
+                                        }
+                                        else {
+                                ?>
                                         <form id="login" action="login.php" method="POST">
                                                 <label for="username">username</label><input type="text" name="username" class="placeholder" placeholder="Akun Pengguna"><br/>
                                                 <label for="password">password</label><input type="password" name="password" class="placeholder" placeholder="Kata Sandi"><br/>
                                                 <input type="submit" value="Masuk">
                                         </form>
-    
+                                <?php
+                                        }
+                                ?>
 
 
                           </div>
