@@ -49,17 +49,17 @@
                           <div id="masuk" class="grid_5">
                                  
                           
-                                      <?php
+                                <?php
                                     session_start();
                                     if(isset($_SESSION['user']))
                                      {
                                         $username = $_SESSION['user'];
                                         echo "Hello , " .$username;
-                                 ?>
-                                 <a href="logout.php"> <button>Logout</button></a>
-                                 <div id="content" class="grid_24">
-                                    Maaf anda telah login, maka tidak bisa mendaftar lagi<br>
-                                 </div>
+                                ?>
+                                    <a href="logout.php"> <button>Logout</button></a>
+                                    <div id="content" class="grid_24">
+                                       Maaf, ketika anda sedang login, maka anda tidak bisa mendaftar. Mohon logout terlebih dahulu.<br>
+                                    </div>
                                 <?php
                                         }
                                         else {
@@ -69,8 +69,6 @@
                                                 <label for="password">password</label><input type="password" name="password" class="placeholder" placeholder="Kata Sandi"><br/>
                                                 <input type="submit" value="Masuk">
                                         </form>
-                                
-
 
                           </div>
 

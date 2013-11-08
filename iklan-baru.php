@@ -1,3 +1,37 @@
+<?php 
+    include("koneksi.php");
+
+    session_start();
+
+    if (isset($_POST['judul']) && isset($_POST['kategori']) && isset($_POST['harga']) && isset($_POST['nego']) && isset($_POST['kondisi']) && isset($_POST['propinsi']) && isset($_POST['deskripsi']))
+    {
+        $judul = $_POST['judul'];
+        $deskripsi = $_POST['deskripsi'];
+        $kategori = $_POST['kategori'];
+        $username = $_SESSION['user'];
+        $nego = $_POST['nego'];
+        $kondisi = $_POST['kondisi'];
+        $propinsi = $_POST['propinsi'];
+        $tag1 = $_POST['tag1'];
+        $tag2 = $_POST['tag2'];
+        $tag3 = $_POST['tag3'];
+        $tag4 = $_POST['tag4'];
+
+        $query = "INSERT INTO `perantara`.`user` (`id_topik`,`title`, `isi`, `date`, `kategori`, `username`, `nego`, `kondisi`, `propinsi`, `tag1`, `tag2`, `tag3`, `tag4`) VALUES ( NULL,'".$judul."','".$deskripsi."',  CURRENT_TIMESTAMP, '".$kategori."', '".$username."', '".$nego."', '".$kondisi."', '".$propinsi."','".tag1."','".tag2."','".tag3."','".tag4."')";
+
+        $res = mysql_query("$query");
+
+        if ($res)
+        {
+            echo "query berhasil ditambahkan";
+        }
+    }
+    else
+        echo "Isi semua yang bertanda bintang";
+
+    mysql_close($koneksi);
+?>
+
 <!DOCTYPE html>
 <html>
         <head>
@@ -41,14 +75,13 @@
                                 <td>harga: </td> <td><input type="text" name="harga"/></td>
                             </tr>
                             <tr>
-                                <td>nego : </td> <td><input type="checkbox" name="nego"/></td>
+                                <td>nego : </td> <td><input type="checkbox" name="nego" value="iya"/></td>
                             </tr>
                             <tr>
                                 <td>kondisi : </td>
                                      <td><select name="kondisi">
                                             <option value="baru">Baru</option>
                                             <option value="bekas">Bekas</option>
-                                            <option>Bekas baru sebentar</option>
                                           </select></td>
                             </tr>
                             <tr>
@@ -61,22 +94,22 @@
                                           </select></td>
                             </tr>
                             <tr>
-                                <td>deskripsi : </td> <td><input type="text" name="kategori"/></td>
+                                <td>deskripsi : </td> <td><input type="text" name="deskripsi"/></td>
                             </tr>
                             <tr>
-                                <td>gambar1 : </td> <td><input type="file" name="kategori"/></td>
+                                <td>gambar1 : </td> <td><input type="file" name="gambar1"/></td>
                             </tr>
                             <tr>
-                                <td>gambar2 : </td><td><input type="file" name="kategori"/></td>
+                                <td>gambar2 : </td><td><input type="file" name="gambar2"/></td>
                             </tr>
                         </table>
                         <table>
                             <tr>
                                 <td>tag1 : <input type="text" name="tag1"/></td>
-                                <td>tag3 : <input type="text" name="tag2"/></td>
+                                <td>tag3 : <input type="text" name="tag3"/></td>
                             </tr>
                             <tr>
-                                <td>tag2 : <input type="text" name="tag3"/></td>
+                                <td>tag2 : <input type="text" name="tag2"/></td>
                                 <td>tag4 : <input type="text" name="tag4"/></td>
                             </tr>
                         </table>
@@ -93,7 +126,19 @@
                         
                        </form>
                     </div>
-                    
+                     <div id="daftar_iklan">
+                        Iklan saya
+                            <?php 
+                            #echo "
+                            #       <ul>
+                                    # while() {
+                                        # code...
+                                    # }
+                            #       </ul>
+                            #     "
+                            ?>
+                        <a href="iklan-baru.php"> buat iklan</a>
+                    </div>
   
                   </div>
 

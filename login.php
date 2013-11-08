@@ -14,11 +14,10 @@
 					
 		sleep(2);//seconds to wait..
 		echo "Login berhasil, selamat datang ".$username;
-		session_start();
-					$_SESSION['user'] = $username;
+			session_start();
+			$_SESSION['user'] = $username;
 			
 			header("Location:".$_SERVER['HTTP_REFERER']."");
-			
 	}
 	else {
 		echo "Login gagal, username atau password anda salah <br>";
