@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+        <head>
+               
+        
+                <script type="text/javascript" src="jquery-1.10.2.js"></script>
+                <link rel="stylesheet" href="css/960_24_col.css" type="text/css"/>
+                <link rel="stylesheet" href="css/mypage.css" type="text/css"/>
+                <link rel="stylesheet" href="css/headerfooter.css" type="text/css"/>
+                <meta charset="utf-8">
+                <title>mypage-Perantara.com</title>
+
+        </head>
+
+        <body>
+                <div id="wrap" class="container_24">
+                	<div id="header" class="grid_24">
+
+                		  <div id="banner" class="grid_18">
+                                  <a href="home.html">SEMENTARA<img src="banner.jpg" height="300" width="600"></a>
+                      </div>
+
+                          <div id="masuk" class="grid_5">
+                                 
+                          
+                                        <form id="login" action="login.php" method="POST">
+                                                <label for="username">username</label><input type="text" name="username" class="placeholder" placeholder="Akun Pengguna"><br/>
+                                                <label for="password">password</label><input type="password" name="password" class="placeholder" placeholder="Kata Sandi"><br/>
+                                                <input type="submit" value="Masuk">
+                                        </form>
+    
+
+
+                          </div>
+
+
+                                  
+                      </div>
+                      <head><div id="banner" class="grid_18">
+                        <a href="home.html">home<img src="banner.jpeg" height="300" width="600"></a>><a href="mypage.html">halaman saya<img src="banner.jpeg" height="300" width="600"></a></div>
+                      </h>
+                      <h><div id="banner" class="grid_6">
+                        <a href="home.html">- Profil Saya<img src="banner.jpg" height="1000" width="300"></a></br><a href="gantipass.html">- Ganti Password<img src="banner.jpeg" height="300" width="600"></a></br><a href="cekstatus.html">- cek status<img src="banner.jpeg" height="300" width="600"></a></div></h>
+                        <b><div id="fotouser" class="grid_18">
+                       <form id="foto" >
+                        
+                          <input  type="text"  placeholder="Kata Pencarian" autocomplete="off"></input>
+                        
+                          <input type="submit" value="Cari">
+                        </div>
