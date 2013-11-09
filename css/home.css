@@ -1,11 +1,7 @@
-* { border : solid 1px red;
-}
 #pencarian
 {
   margin-left: 60px;
 }
-
-
 #pencarian input[type="text"] {
     width: 70%;
     height: 20px;
@@ -46,4 +42,15 @@
 
 #iklan {
     float : right;
+}
+
+.isiiklan
+{
+    overflow: hidden;
+    height: 120px;
+}
+
+.iklandepan
+{
+    margin-bottom: 10px;
 }

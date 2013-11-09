@@ -148,22 +148,20 @@
                                #}
                                # $query = "SELECT * FROM topik WHERE id_topik='".$numbers[$i]."'" or die('disni');
                                # $hasilquery = mysql_query($query) or die('gagal disini');
-                               echo "<table>";
 
                                 while($data=mysql_fetch_assoc($hasilquery))
-                                {
-                                    echo "<tr>";
-                    
-                                    echo "<td>".$data['title']."</td>";
-                                    echo "<td>".$data['isi']."</td>";
+                                { 
+                                    echo "<div class='iklandepan'>";
 
-                                    echo "<tr>";            
+                                    echo "<strong>".$data['title']."</strong><br/>";
+                                    echo "<div class='isiiklan'>".$data['isi']."</div>";
+
+                                    echo "</div>";
                                  }
-                             echo "</table>";
                           ?> 
                                 <div id="barang1" class="grid_4">
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
                              </div>
                                         
                     </div>
