@@ -43,7 +43,7 @@
                     <div id="header" class="grid_24">
 
                           <div id="banner" class="grid_18">
-                                  <a href="home.html">SEMENTARA<img src="banner.jpeg" height="300" width="600"></a>
+                                  <a href="home.html">SEMENTARA<img src="banner.jpeg" height="" width=""></a>
                       </div>
 
                           <div id="masuk" class="grid_5">

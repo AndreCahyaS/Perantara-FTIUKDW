@@ -3,7 +3,7 @@
 
     session_start();
 
-    if (isset($_POST['judul']) && isset($_POST['kategori']) && isset($_POST['harga']) && isset($_POST['nego']) && isset($_POST['kondisi']) && isset($_POST['propinsi']) && isset($_POST['deskripsi']))
+    if (isset($_POST['judul']) && isset($_POST['kategori']) && isset($_POST['harga']) && isset($_POST['nego']) && isset($_POST['kondisi']) && isset($_POST['propinsi']) && isset($_POST['deskripsi']) && isset($_FILES["gambar1"]) && isset($_FILES["gambar2"]))
     {
         $judul = $_POST['judul'];
         $deskripsi = $_POST['deskripsi'];
@@ -16,18 +16,38 @@
         $tag2 = $_POST['tag2'];
         $tag3 = $_POST['tag3'];
         $tag4 = $_POST['tag4'];
-
-        $query = "INSERT INTO `perantara`.`user` (`id_topik`,`title`, `isi`, `date`, `kategori`, `username`, `nego`, `kondisi`, `propinsi`, `tag1`, `tag2`, `tag3`, `tag4`) VALUES ( NULL,'".$judul."','".$deskripsi."',  CURRENT_TIMESTAMP, '".$kategori."', '".$username."', '".$nego."', '".$kondisi."', '".$propinsi."','".tag1."','".tag2."','".tag3."','".tag4."')";
+        $gambar1 = $_FILES['gambar1'];
+        $gambar2 = $_FILES['gambar2'];
+        $status = $_POST['status'];
+        $harga = $_POST['harga'];
+        $query = "INSERT INTO `perantara`.`user` (`id_topik`,`title`, `isi`, `date`, `kategori`, `username`, `nego`, `kondisi`, `propinsi`, `tag1`, `tag2`, `tag3`, `tag4`, 'status', 'harga') VALUES ( NULL,'".$judul."','".$deskripsi."',  CURRENT_TIMESTAMP, '".$kategori."', '".$username."', '".$nego."', '".$kondisi."', '".$propinsi."','".tag1."','".tag2."','".tag3."','".tag4."','".status."','".harga."')";
 
         $res = mysql_query("$query");
 
         if ($res)
-        {
+        {   
+
             echo "query berhasil ditambahkan";
+             $directoryPath="images/";
+             $query = "SELECT id_topik FROM topik WHERE judul='".$judul."'";
+            move_uploaded_file($_FILES["upload"]["tmp_name"], $directoryPath."".$gambar1."1");
+            move_uploaded_file($_FILES["upload"]["tmp_name"], $directoryPath."".$gambar2."2");
         }
+
+       
     }
     else
         echo "Isi semua yang bertanda bintang";
+
+
+
+            //buat code untuk upload gambar, pindahkan file yang diupload ke images/
+            //  dengan nama avatar.png
+        
+                
+
+            
+
 
     mysql_close($koneksi);
 ?>
@@ -63,7 +83,7 @@
                 <div id="content" class="grid_24">
                   <div id="content_1" class="grid_18">
                     <h4>Iklan Baru</h4>
-                    <form id="new-post" method="POST" action="iklan-id.php" >
+                    <form id="new-post" method="POST" action="iklan-baru.php" >
                         <table>
                             <tr>
                                 <td>judul:</td><td><input type="text" name"judul"/></td>
@@ -95,6 +115,12 @@
                             </tr>
                             <tr>
                                 <td>deskripsi : </td> <td><input type="text" name="deskripsi"/></td>
+                            </tr>
+                            <tr>
+                                <td>Harga : </td> <td><input type="text" name="harga"/></td>
+                            </tr>
+                            <tr>
+                                <td>status : </td> <td><input type="text" name="status"/></td>
                             </tr>
                             <tr>
                                 <td>gambar1 : </td> <td><input type="file" name="gambar1"/></td>
