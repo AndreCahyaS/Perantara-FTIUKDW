@@ -1,4 +1,3 @@
-
 <?php
     include("koneksi.php");
     //masukkan ke data base form sign up
@@ -29,12 +28,11 @@
 <!DOCTYPE html>
 <html>
         <head>
-          <title>register-perantara.com</title>
+          <title>Register - perantara.com</title>
                
         
                 <script type="text/javascript" src="jquery-1.10.2.js"></script>
                 <link rel="stylesheet" href="css/960_24_col.css" type="text/css"/>
-                <link rel="stylesheet" href="css/home.css" type="text/css"/>
                 <link rel="stylesheet" href="css/headerfooter.css" type="text/css"/>
                 <link rel="stylesheet" href="css/register.css" type="text/css"/>
                 <meta charset="utf-8">
@@ -46,7 +44,7 @@
                     <div id="header" class="grid_24">
 
                           <div id="banner" class="grid_18">
-                                  <a href="home.html">SEMENTARA<img src="banner.jpeg" height="" width=""></a>
+                                   <a href="home.php"> <img src="banner.jpeg" height="200" width="600"></a>
                       </div>
 
                           <div id="masuk" class="grid_5">
