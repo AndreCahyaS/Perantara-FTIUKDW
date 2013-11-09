@@ -95,7 +95,10 @@
                                 <td>harga: </td> <td><input type="text" name="harga"/></td>
                             </tr>
                             <tr>
-                                <td>nego : </td> <td><input type="checkbox" name="nego" value="iya"/></td>
+                                <td>nego : </td> <td><select name="nego">
+                                            <option value="ya">ya</option>
+                                            <option value="tidak">tidak</option>
+                                          </select></td>
                             </tr>
                             <tr>
                                 <td>kondisi : </td>
