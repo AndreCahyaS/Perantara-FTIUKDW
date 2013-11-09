@@ -1,4 +1,3 @@
-
 <?php
     include("koneksi.php");
     //masukkan ke data base form sign up
@@ -29,7 +28,7 @@
 <!DOCTYPE html>
 <html>
         <head>
-          <title>register-perantara.com</title>
+          <title>Register - perantara.com</title>
                
         
                 <script type="text/javascript" src="jquery-1.10.2.js"></script>
