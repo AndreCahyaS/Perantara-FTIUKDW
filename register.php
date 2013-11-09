@@ -1,3 +1,4 @@
+
 <?php
     include("koneksi.php");
     //masukkan ke data base form sign up
@@ -27,6 +28,7 @@
 <!DOCTYPE html>
 <html>
         <head>
+          <title>register-perantara.com</title>
                
         
                 <script type="text/javascript" src="jquery-1.10.2.js"></script>
@@ -58,7 +60,7 @@
                                 ?>
                                     <a href="logout.php"> <button>Logout</button></a>
                                     <div id="content" class="grid_24">
-                                       Maaf, ketika anda sedang login, maka anda tidak bisa mendaftar. Mohon logout terlebih dahulu.<br>
+                                       Maaf, ketika anda sedang log<br>in, maka anda tidak bisa men<br>daftar. Mohon logout terlebi<br>h dahulu.<br>
                                     </div>
                                 <?php
                                         }
@@ -111,7 +113,7 @@
                                                 
                                                <tr>
                                                   <td> 
-                                                <input type="submit" value="Tambah"></td>
+                                                <input type="submit" value="Daftar"></td>
                                                   </tr>
                                       </table>             
                                         </form>
