@@ -120,51 +120,52 @@
                     </div>
                 
                      <div id="iklan" class="grid_5">
-                                 <?php 
-
-                            
+                                  <?php 
                             $result = mysql_query("Select * from topik");
                             $total = mysql_num_rows($result);       
                             $numbers = array(1,1,1,1);
                         
-                                    while ( $numbers[0] == $numbers[1] || $numbers[0] == $numbers[2] || $numbers[0] == $numbers[3] || $numbers[1] == $numbers[2] || $numbers[1] == $numbers[3] || $numbers[2] == $numbers[3]  ) {
-                                     
-                                    
-                                    $numbers[0] = rand(1, $total);
-                                    $numbers[1] = rand(1, $total);
-                                    $numbers[2] = rand(1, $total);
-                                    $numbers[3] = rand(1, $total);
+                                    while ( $numbers[0] == $numbers[1] || $numbers[0] == $numbers[2] || $numbers[0] == $numbers[3] || $numbers[1] == $numbers[2] || $numbers[1] == $numbers[3] || $numbers[2] == $numbers[3]  ) 
+                                    {                                    
+                                        $numbers[0] = rand(1, $total);
+                                        $numbers[1] = rand(1, $total);
+                                        $numbers[2] = rand(1, $total);
+                                        $numbers[3] = rand(1, $total);
                                     }
             
                         
                                 echo "$numbers[1] $numbers[2] $numbers[3] $numbers[0]";
 
                             
-                               /*for($i=0;$i<4;$i++) {
-                                $query = "SELECT * FROM topik WHERE id_topik='".$numbers[$i]."'" or die('disni');
-                                $hasilquery = mysql_query($query) or die('gagal disini');
+                               #for($i=0;$i<4;$i++)
+                               #{
+                                    $query = "SELECT title,isi FROM topik WHERE id_topik='".$numbers[0]."' OR id_topik='".$numbers[1]."' OR id_topik='".$numbers[2]."' OR id_topik='".$numbers[3]."'" or die('disni');
+                                    $hasilquery = mysql_query($query);
 
-                              
-                                echo $hasilquery['title'];
-                               }*/
-                                $query = "SELECT * FROM topik WHERE id_topik='".$numbers[$i]."'" or die('disni');
-                                $hasilquery = mysql_query($query) or die('gagal disini');
+                                    #echo $hasilquery['id_topik']."wewew";
+                                  
+                                    #echo $hasilquery['title'];
+                               #}
+                               # $query = "SELECT * FROM topik WHERE id_topik='".$numbers[$i]."'" or die('disni');
+                               # $hasilquery = mysql_query($query) or die('gagal disini');
                                echo "<table>";
+
                                 while($data=mysql_fetch_assoc($hasilquery))
                                 {
-                                  
-                                   
                                     echo "<tr>";
                     
-                                    echo $data['title'];
+                                    echo "<td>".$data['title']."</td>";
+                                    echo "<td>".$data['isi']."</td>";
+
                                     echo "<tr>";            
-                             }
-                            ?> 
+                                 }
+                             echo "</table>";
+                          ?> 
                                 <div id="barang1" class="grid_4">
                                                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
                              </div>
-                    
+                                        
                     </div>
 
                     <div id="footer" class="grid_24">

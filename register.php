@@ -19,7 +19,8 @@
         else echo("gagal tambah");
 
     }
-    else {
+    else if(isset($_POST['username']) || isset($_POST['nama']) || isset($_POST['email']) ||  isset($_POST['password']))
+    {
         echo "Isi semua";
     }
     mysql_close($koneksi);
@@ -59,6 +60,8 @@
                                         echo "Hello , " .$username;
                                 ?>
                                     <a href="logout.php"> <button>Logout</button></a>
+                          </div>
+                      </div>
                                     <div id="content" class="grid_24">
                                        Maaf, ketika anda sedang log<br>in, maka anda tidak bisa men<br>daftar. Mohon logout terlebi<br>h dahulu.<br>
                                     </div>
