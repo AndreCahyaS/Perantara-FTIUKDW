@@ -8,4 +8,5 @@
 
 	//Pilih databasenya
 	mysql_select_db($database_name) or die("gagal pilih database");
+?>
 

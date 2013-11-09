@@ -45,13 +45,13 @@
 				<?php 
 					echo "upload gambar <br>";
 					
-					$dir = 'userimage/'
+					$dir = 'userimage/';
 					if ( $_FILES['pp']['size'] != 0)
 					{
 						$uploadpp = $dir.$_FILES['pp']['name'];
 						if ($_FILES['pp']['type'] == "image/jpg")
 						{
-							if (move_uploaded_file($_FILES['pp']['tmp_name'], $uploadpp)
+							if (move_uploaded_file($_FILES['pp']['tmp_name'], $uploadpp))
 							{
 								echo "Upload berhasil<br/>";
 								#$query = "UPDATE ";
@@ -59,7 +59,7 @@
 							}
 							else
 							{
-								echo "Upload gagal<br/>"
+								echo "Upload gagal<br/>";
 							}
 						}
 						else
