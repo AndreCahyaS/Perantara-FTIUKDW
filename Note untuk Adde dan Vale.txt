@@ -1,0 +1,7 @@
+Adde dan Vale bagi tugas, membuat isi dari 'petunjuk' dan 'tentang-kami'
+
+Pertama, copy isi index.php ke dalam file petunjuk.php
+
+Hapus semua isi dari div content, tuliskan di situ sesuai dengan tugas kalian masing"...
+
+BTW, disclaimer itu bahasa indonya apa?

@@ -5,17 +5,18 @@
         
                 <script type="text/javascript" src="jquery-1.10.2.js"></script>
                 <link rel="stylesheet" href="css/960_24_col.css" type="text/css"/>
-                <link rel="stylesheet" href="css/home.css" type="text/css"/>
+                <link rel="stylesheet" href="css/hasil-pencarian.css" type="text/css"/>
                 <link rel="stylesheet" href="css/headerfooter.css" type="text/css"/>
                 <meta charset="utf-8">
-
+                <title>Pencarian-Perantara.com</title>
+                
         </head>
 
         <body>
-                <div id="wrap" class="container_24">
-                	<div id="header" class="grid_24">
+            <div id="wrap" class="container_24">
+                <div id="header" class="grid_24">
 
-                		  <div id="banner" class="grid_18">
+                          <div id="banner" class="grid_18">
                                   <a href="index.php"> <img src="banner.jpeg" height="200" width="600"></a>
                       </div>
 
@@ -51,18 +52,17 @@
                                   
                       </div>
 
-                  
-                  <div id="content" class="grid_24">
-
+                <div id="content" class="grid_24">
                     <div id="pencarian" class="grid_18">
-                       <form id="cari" action="hasil-pencarian.php" method="GET">
+
+                       <form id="cari" method="GET" action="hasil-pencarian.php">
                         
-                          <input  type="text"  placeholder="Kata Pencarian" autocomplete="off"></input>
+                          <input  type="text"  placeholder="Kata Pencarian" autocomplete="off" name="search"/>
                         
-                          <input type="submit" value="Cari">
+                          <input type="submit" value="Cari" class="button2">
                         
-                          <select id="provinsi">
-                            <option value="semua-kategori">Semua provinsi</option>
+                          <select id="provinsi" name="provinsi">
+                            <option value="semua-provinsi">Semua provinsi</option>
                             <option value="aceh">Aceh</option>
                             <option value="bali">Bali</option>
                             <option value="belitung">Bangka Belitung</option>
@@ -99,7 +99,7 @@
                             
                           </select> 
 
-                           <select id="Kategori">
+                           <select id="Kategori" name="kategori">
                             <option value="semua-kategori">Semua Kategori</option>
                             <option value="Kendaraan">Kendaraan</option>
                             <option value="properti">Properti</option>
@@ -109,68 +109,84 @@
                             <option value="hobiolahraga">Hobi dan Olahraga</option>
                             <option value="rumahtangga">Rumah Tangga</option>
                             <option value="hewanpeliharaan">Hewan Peliharaan</option>
-                            </select> 
+                     
+                          </select> 
+                           
+
+
                         
                        </form>
-
-                  </div>
-                    <div id="barang" class="grid_18">
-                        <h2>Pilih Berdasar Kategori :</h2>
-                            
-                               
                     </div>
-                
-                     <div id="iklan" class="grid_5">
-                                  <?php 
-                            $result = mysql_query("Select * from topik");
-                            $total = mysql_num_rows($result);       
-                            $numbers = array(1,1,1,1);
-                        
-                                    while ( $numbers[0] == $numbers[1] || $numbers[0] == $numbers[2] || $numbers[0] == $numbers[3] || $numbers[1] == $numbers[2] || $numbers[1] == $numbers[3] || $numbers[2] == $numbers[3]  ) 
-                                    {                                    
-                                        $numbers[0] = rand(1, $total);
-                                        $numbers[1] = rand(1, $total);
-                                        $numbers[2] = rand(1, $total);
-                                        $numbers[3] = rand(1, $total);
-                                    }
-            
-                        
-                                echo "$numbers[1] $numbers[2] $numbers[3] $numbers[0]";
-
+                    <div id="hasil-pencarian" class="grid_18">
+                         <?php 
+                         if(isset($_GET['provinsi']) || isset($_GET['pencarian']))
+                            if ($_GET['provinsi'] == "semua-provinsi") {
+                                $provinsi = "!= '".$_GET['provinsi']."'";
+                            }
+                            else
+                            {
+                                $provinsi = "= '".$_GET['provinsi']."'";
+                            }
                             
-                               #for($i=0;$i<4;$i++)
-                               #{
-                                    $query = "SELECT * FROM topik WHERE id_topik='".$numbers[0]."' OR id_topik='".$numbers[1]."' OR id_topik='".$numbers[2]."' OR id_topik='".$numbers[3]."'" or die('disni');
-                                    $hasilquery = mysql_query($query);
+                            if($_GET['kategori'] == "semua-kategori")
+                            {
+                                $kategori = "!= '".$_GET['kategori']."'";
+                            }
+                            else
+                            {
+                                $kategori = "= '".$_GET['kategori']."'";
+                            }
 
-                                    #echo $hasilquery['id_topik']."wewew";
-                                  
-                                    #echo $hasilquery['title'];
-                               #}
-                               # $query = "SELECT * FROM topik WHERE id_topik='".$numbers[$i]."'" or die('disni');
-                               # $hasilquery = mysql_query($query) or die('gagal disini');
+                            if($_GET['pencarian'] == "")
+                            {
+                                $pencarian = "!= '".$_GET['pencarian']."'";
+                            }
+                            else
+                            {
+                                $pencarian = "= '".$_GET['pencarian']."'";
+                            }
 
-                                while($data=mysql_fetch_assoc($hasilquery))
-                                { 
-                                   ?>
-                                    <div class="iklandepan grid_5">
-                                    <a href="pages?id=<?php echo $data['id_topik']; ?>"
-                                    
-                                    <strong><?php echo $data['title']; ?></strong><br/>
-                                    <img src="image/<?php echo $data['gambar1'];?>" width=150>
-                                    
-                                   <div class="isiiklan"> 
-                                    <?php echo $data['isi'];?></div>
+                            $query = "SELECT * FROM post WHERE deskripsi ".$pencarian." OR judul ".$pencarian." OR tag1 ".$pencarian." AND provinsi ".$provinsi." AND kategori ".$kategori
+                            $res = mysql_query($query)
 
-                                    <a/>
-                                    </div>
-                                    
-                           <?php
-                                 }
-                          ?> 
-                           </div>
+                            $total = mysql_num_rows($res);
 
-                    <div id="footer" class="grid_24">
+                         ?>
+                         <div id="jumlah">Ditemukan <?php echo $total ?> hasil dari pencarian</div>
+                         <div class="clear"></div>
+                            <?php 
+                                while($data = mysql_fetch_assoc($res))
+                                {
+                                    echo '<a href="rincian.php?id='.$data['id'].
+                            ?>
+                         <div class="hasil">
+                                    <img src="<?php echo $data['gambar'] ?>" title="<?php echo $data['judul'] ?>">
+
+                                    <p>
+                                        <?php
+                                            echo $data['deskripsi'];
+                                        ?>
+                                        <!-- Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum. -->
+                                    </p>
+
+                         </div>
+                            <?php 
+                                    '"></a>';
+                                }
+                            ?>
+
+                         <?php if(isset($_SESSION['user'])){ ?><a href="iklan-baru.php" class="button2">Buat Iklan Baru</a>  <?php } ?>
+
+                    </div>
+
+                </div>
+
+                 <div id="footer" class="grid_24">
                         
                                     <ul>
                                             <li><a href="#" class="grid_4"><strong>Disclaimer</strong></a></li>
@@ -179,6 +195,7 @@
                                     </ul>
                     
                     </div>
+
            </div>
         </body>
 

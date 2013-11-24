@@ -1,0 +1,15 @@
+#content img
+{
+	border-radius:10px;
+}
+
+#content
+{
+	width: auto;
+	margin-bottom: 40px;
+}
+
+#wrap
+{
+	background-color: #aaaaff;
+}
