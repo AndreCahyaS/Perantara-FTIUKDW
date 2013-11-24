@@ -16,7 +16,7 @@
                 	<div id="header" class="grid_24">
 
                 		  <div id="banner" class="grid_18">
-                                  <a href="home.php"> <img src="banner.jpeg" height="200" width="600"></a>
+                                  <a href="index.php"> <img src="banner.jpeg" height="200" width="600"></a>
                       </div>
 
                           <div id="masuk" class="grid_5">
@@ -29,6 +29,7 @@
                                         echo "Hello , " .$username;
                                  ?>
                                  <a href="logout.php"> <button>Logout</button></a>
+                                  <a href="iklan-baru.php"><input type="submit" value="Buat Iklan Baru"></a>
                                 <?php
                                         }
                                         else {
@@ -38,6 +39,7 @@
                                                 <label for="password">password</label><input type="password" name="password" class="placeholder" placeholder="Kata Sandi"><br/>
                                                 <input type="submit" value="Masuk">
                                         </form>
+                                        <a href="register.php"><input type="submit" value="Daftar"></a>
                                 <?php
                                         }
                                 ?>
@@ -99,7 +101,6 @@
 
                            <select id="Kategori">
                             <option value="semua-kategori">Semua Kategori</option>
-                           <option value="semua-kategori">Semua Kategori</option>
                             <option value="Kendaraan">Kendaraan</option>
                             <option value="properti">Properti</option>
                             <option value="fashion">Fashion</option>
@@ -139,7 +140,7 @@
                             
                                #for($i=0;$i<4;$i++)
                                #{
-                                    $query = "SELECT title,isi FROM topik WHERE id_topik='".$numbers[0]."' OR id_topik='".$numbers[1]."' OR id_topik='".$numbers[2]."' OR id_topik='".$numbers[3]."'" or die('disni');
+                                    $query = "SELECT * FROM topik WHERE id_topik='".$numbers[0]."' OR id_topik='".$numbers[1]."' OR id_topik='".$numbers[2]."' OR id_topik='".$numbers[3]."'" or die('disni');
                                     $hasilquery = mysql_query($query);
 
                                     #echo $hasilquery['id_topik']."wewew";
@@ -151,20 +152,21 @@
 
                                 while($data=mysql_fetch_assoc($hasilquery))
                                 { 
-                                    echo "<div class='iklandepan'>";
+                                   ?><div class="iklandepan grid_5">
+                                    <a href="pages?id=<?php echo $data['id_topik']; ?>"
+                                    
+                                    <strong><?php echo $data['title']; ?></strong><br/>
+                                    <img src="image/<?php echo $data['gambar1'];?>" width=150>
+                                   <div class="isiiklan"> 
+                                    <?php echo $data['isi'];?></div>
 
-                                    echo "<strong>".$data['title']."</strong><br/>";
-                                    echo "<div class='isiiklan'>".$data['isi']."</div>";
-
-                                    echo "</div>";
+                                    <a/>
+                                    </div>
+                                    
+                           <?php
                                  }
                           ?> 
-                                <div id="barang1" class="grid_4">
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
-                             </div>
-                                        
-                    </div>
+                           </div>
 
                     <div id="footer" class="grid_24">
                         

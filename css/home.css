@@ -53,7 +53,13 @@
 
 .iklandepan
 {
-    margin-bottom: 10px;
-    border: solid 1px black;
+    margin: 5px;
+    border: solid 1px blue;
     padding: 1px;
+    float : right;
+
+}
+
+#barang {
+	height : 1000px;
 }

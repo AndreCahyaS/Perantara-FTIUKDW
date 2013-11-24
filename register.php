@@ -1,5 +1,6 @@
 <?php
     include("koneksi.php");
+    require ("PasswordHash.php");
     //masukkan ke data base form sign up
     //cek dulu apa ada data yang dikirim
 
@@ -8,13 +9,21 @@
        $nama = $_POST['nama'];
        $email = $_POST['email'];
        $password = $_POST['password'];
-       $query = "INSERT INTO `perantara`.`user` (`user_id` ,`username` ,`nama` ,`email` ,`password` ,`joindate`)VALUES (NULL,  '".$username."',  
-        '".$nama."',  '".$email."',  '".$password."', CURRENT_TIMESTAMP)";
+
+       
+
+        $hasher = new PasswordHash(8, TRUE);
+        $hash = $hasher->HashPassword($password);
+        $pass = sha1($password);
+
+       $query = "INSERT INTO `u957988429_a`.`user` (`user_id` ,`username` ,`nama` ,`email` ,`password` ,`joindate`)VALUES (NULL,  '".$username."',  
+        '".$nama."',  '".$email."',  '".$pass."', CURRENT_TIMESTAMP)";
 
 
         $res = mysql_query($query) or die("gagal Query disini");
 
-        if($res) echo "Berhasil ditambah";
+        if($res) { echo "Berhasil ditambah";
+}
         else echo("gagal tambah");
 
     }
@@ -44,7 +53,7 @@
                     <div id="header" class="grid_24">
 
                           <div id="banner" class="grid_18">
-                                   <a href="home.php"> <img src="banner.jpeg" height="200" width="600"></a>
+                                   <a href="index.php"> <img src="banner.jpeg" height="200" width="600"></a>
                       </div>
 
                           <div id="masuk" class="grid_5">

@@ -1,19 +1,33 @@
 <?php
 	//konek database dulu
 	include("koneksi.php");
+	require ("PasswordHash.php");
 
 	$username = $_POST['username'];
 	$password = $_POST['password'];
+	$passe = sha1($password);
+	$hasher = new PasswordHash(8, TRUE);
+	$hash = $hasher->HashPassword($password);
 
+	
 	//query ke db ada tidaknya user
-	$query = "SELECT * FROM `user` WHERE username LIKE '".$username."' AND password LIKE '".$password."'";
+	$query = "SELECT * FROM `user` WHERE username LIKE ? AND password LIKE '".$passe."'";
 
-	$hasil = mysql_query($query) or die("Gagal query");
 
-	if(mysql_num_rows($hasil) > 0) {
-					
-		sleep(2);//seconds to wait..
+
+	$mysqli = new mysqli($host, $user, $pass, $database_name)or die( "Unable to select database");
+
+	$stmt = mysqli_prepare($mysqli, $query);
+
+	mysqli_stmt_bind_param($stmt, "s", $username);
+	mysqli_stmt_execute($stmt);
+
+	mysqli_stmt_store_result($stmt);
+ 
+	if(mysqli_stmt_num_rows($stmt) === 1) {
+		
 		echo "Login berhasil, selamat datang ".$username;
+		sleep(0.5);//seconds to wait..
 			session_start();
 			$_SESSION['user'] = $username;
 			
@@ -23,4 +37,10 @@
 		echo "Login gagal, username atau password anda salah <br>";
 		echo "<a href='".$_SERVER['HTTP_REFERER']."'>Kembali </a>";
 	}
+	mysql_close($koneksi);
+
+	mysqli_close($mysqli);
+
+
+	
 ?>

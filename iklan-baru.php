@@ -1,14 +1,19 @@
 <?php 
     include("koneksi.php");
-
     session_start();
 
-    if (isset($_POST['judul']) && isset($_POST['kategori']) && isset($_POST['harga']) && isset($_POST['nego']) && isset($_POST['kondisi']) && isset($_POST['propinsi']) && isset($_POST['deskripsi']))
+    if(!isset($_SESSION['user'])) {
+        header("Location:intruder.php");
+    }
+
+    if (isset($_POST['judul']) && isset($_POST['kategori']) && isset($_POST['harga']) && isset($_POST['deskripsi']))
     {
         $judul = $_POST['judul'];
         $deskripsi = $_POST['deskripsi'];
         $kategori = $_POST['kategori'];
+        $status = "Belum Terjual";
         $username = $_SESSION['user'];
+        $harga = $_POST['harga'];
         $nego = $_POST['nego'];
         $kondisi = $_POST['kondisi'];
         $propinsi = $_POST['propinsi'];
@@ -16,18 +21,39 @@
         $tag2 = $_POST['tag2'];
         $tag3 = $_POST['tag3'];
         $tag4 = $_POST['tag4'];
+        $date1 = date("D M d, Y G:i , s");
+        $date2 = date("D M d, Y G: , s");
 
-        $query = "INSERT INTO `perantara`.`user` (`id_topik`,`title`, `isi`, `date`, `kategori`, `username`, `nego`, `kondisi`, `propinsi`, `tag1`, `tag2`, `tag3`, `tag4`) VALUES ( NULL,'".$judul."','".$deskripsi."',  CURRENT_TIMESTAMP, '".$kategori."', '".$username."', '".$nego."', '".$kondisi."', '".$propinsi."','".tag1."','".tag2."','".tag3."','".tag4."')";
+            if(isset($_FILES['gambar1']) || isset($_FILES['gambar2'])) {
+            $dir = "image/"; 
+            $namagambar1 = sha1($username.$date1).$_FILES["gambar1"]["name"];
+            $namagambar2 = sha1($username.$date2).$_FILES["gambar2"]["name"];
+            if($gambar1type == "image/jpeg" || $gambar1type == "image/pjpeg" || $gambar1type == "image/x-png" || $gambar1type == "image/gif" || $gambar2type == "image/jpeg" || $gambar2type == "image/pjpeg" || $gambar2type == "image/x-png" || $gambar2type == "image/gif") { 
+ 
+            move_uploaded_file($_FILES["gambar1"]["tmp_name"], $dir.$namagambar1);
+            move_uploaded_file($_FILES["gambar2"]["tmp_name"], $dir.$namagambar2);
+            }
+            else {
+                $namagambar1 = NULL;
+                $namagambar2 = NULL;
+            }
+        }
+            echo $namagambar1;
+            echo $namagambar2;
+        $query = "INSERT INTO `u957988429_a`.`topik` (`id_topik` ,`title` ,`isi` ,`date` ,`kategori` ,`username` ,`nego` ,`kondisi` ,`propinsi` ,`tag1` ,`tag2` ,`tag3` ,`tag4` ,`status` ,`harga` ,`gambar1` ,`gambar2`)
+VALUES (NULL , '".$judul."', '".$deskripsi."', CURRENT_TIMESTAMP , '".$kategori."', '".$username."', '".$nego."', '".$kondisi."', '".$propinsi."', '".$tag1."', '".$tag2."', '".$tag3."', '".$tag4."', '".$status."', '".$harga."', '".$namagambar1."' , '".$namagambar2."')";
 
-        $res = mysql_query("$query");
+        $res = mysql_query("$query") or die("gagal query post");
 
         if ($res)
         {
-            echo "query berhasil ditambahkan";
+            header("Location:iklan-baru.php?add=1");
         }
     }
-    else
-        echo "Isi semua yang bertanda bintang";
+    else {
+        $semua = "Harap Isi Semua kolom yang ada";
+    }
+            
 
     mysql_close($koneksi);
 ?>
@@ -50,34 +76,77 @@
                 <div id="header" class="grid_24">
 
                     <div id="banner" class="grid_18">
-                        <a href="home.php"> <img src="banner.jpeg" height="200" width="600"></a>
+                        <a href="index.php"> <img src="banner.jpeg" height="200" width="600"></a>
                     </div>
 
-                    <form id="login" method="POST" class="grid_5" action="login.php">
-                        <label for="username">username</label><input type="text" name="username" class="placeholder" placeholder="Akun Pengguna"><br/>
-                        <label for="password">password</label><input type="password" name="password" class="placeholder" placeholder="Kata Sandi"><br/>
-                        <input type="submit" value="Masuk">
-                        <input type="submit" value="Daftar?">
-                    </form> 
+
+                          <div id="masuk" class="grid_5">
+                                 <?php
+                                    include("koneksi.php");
+                                    
+                                    if(isset($_SESSION['user']))
+                                     {
+                                        $username = $_SESSION['user'];
+                                        echo "Hello , " .$username;
+                                 ?>
+                                 <a href="logout.php"> <button>Logout</button></a>
+                                <?php
+                                        }
+                                        else {
+                                ?>
+                                        <form id="login" action="login.php" method="POST">
+                                                <label for="username">username</label><input type="text" name="username" class="placeholder" placeholder="Akun Pengguna"><br/>
+                                                <label for="password">password</label><input type="password" name="password" class="placeholder" placeholder="Kata Sandi"><br/>
+                                                <input type="submit" value="Masuk">
+                                        </form>
+                                <?php
+                                        }
+                                ?>
+
+
+                          </div>
+
                 </div>
 
                 <div id="content" class="grid_24">
                   <div id="content_1" class="grid_18">
                     <h4>Iklan Baru</h4>
-                    <form id="new-post" method="POST" action="iklan-id.php" >
+                    <?php
+                    if(isset($_GET['add'])) {
+                        echo "Data Berhasil ditambahkan";
+                    }
+                    
+                     else   echo $semua;
+                    ?>
+                    <form action="iklan-baru.php" method="POST" enctype="multipart/form-data">
                         <table>
                             <tr>
-                                <td>judul:</td><td><input type="text" name"judul"/></td>
+                                <td>judul:</td><td><input type="text" name="judul"></td>
                             </tr>
                             <tr>
-                                <td>kategori: </td> <td><input type="text" name="kategori"/></td>
+                                 <td>Kategori : </td>
+                                     <td><select name="kategori">
+                                             <option value="Kendaraan">Kendaraan</option>
+                                             <option value="properti">Properti</option>
+                                             <option value="fashion">Fashion</option>
+                                             <option value="elektronikgadget">Elektronik dan Gadget</option>
+                                             <option value="kecantikankesehatan">Kecantikan dan Kesehatan</option>
+                                             <option value="hobiolahraga">Hobi dan Olahraga</option>
+                                             <option value="rumahtangga">Rumah Tangga</option>
+                                             <option value="hewanpeliharaan">Hewan Peliharaan</option>
+                                          </select></td>
                             </tr>
                             <tr>
-                                <td>harga: </td> <td><input type="text" name="harga"/></td>
+                                <td>harga: </td> <td><input type="text" name="harga"></td>
                             </tr>
                             <tr>
-                                <td>nego : </td> <td><input type="checkbox" name="nego" value="iya"/></td>
+                                <td>Nego : </td>
+                                     <td><select name="nego">
+                                            <option value="nego">Nego</option>
+                                            <option value="nonego">No Nego</option>
+                                          </select></td>
                             </tr>
+                            
                             <tr>
                                 <td>kondisi : </td>
                                      <td><select name="kondisi">
@@ -88,51 +157,66 @@
                             <tr>
                                 <td>propinsi : </td>
                                      <td><select name="propinsi">
-                                            <option>Pilih Propinsi</option>
                                             <option value="aceh">Aceh</option>
-                                            <option value="Bekasi">Bekasi</option>
-                                            <option value="Jawa Timur">Jawa Timur</option>
+                                            <option value="bali">Bali</option>
+                                            <option value="belitung">Bangka Belitung</option>
+                                            <option value="banten">Banten</option>
+                                            <option value="bengkulu">Bengkulu</option>
+                                            <option value="gorontalo">Gorontalo</option>
+                                            <option value="jakarta">DKI Jakarta</option>
+                                            <option value="jambi">Jambi</option>
+                                            <option value="jabar">Jawa Barat</option>
+                                            <option value="jateng">Jawa Tengah</option>
+                                            <option value="jatim">Jawa Timur</option>
+                                            <option value="kalbar">Kalimantan Barat</option>
+                                            <option value="kalsel">Kalimantan Selatan</option>
+                                            <option value="kalteng">Kalimantan Tengah</option>
+                                            <option value="kaltim">Kalimantan TImur</option>
+                                            <option value="kepriau">Kepulauan Riau</option>
+                                            <option value="lampung">Lampung</option>
+                                            <option value="maluku">Maluku</option>
+                                            <option value="malut">Maluku Utara</option>
+                                            <option value="ntb">Nusa Tenggara Barat</option>
+                                            <option value="ntt">Nusa Tenggara Timur</option>
+                                            <option value="papua">Papua</option>
+                                            <option value="papuabarat">Papua Barat</option>
+                                            <option value="riau">Riau</option>
+                                            <option value="sulbar">Sulawesi Barat</option>
+                                            <option value="sulsel">Sulawesi Selatan</option>
+                                            <option value="sulteng">Sulawesi Tengah</option>
+                                            <option value="sultenggara">Sulawesi Tenggara</option>
+                                            <option value="sulut">Sulawesi Utara</option>
+                                            <option value="sumbar">Sumatra Barat</option>
+                                            <option value="sumsel">Sumatra Selatan</option>
+                                            <option value="sumut">Sumatra Utara</option>
+                                            <option value="jogja">Yogyakarta</option>
                                           </select></td>
                             </tr>
                             <tr>
-                                <td>deskripsi : </td> <td><input type="text" name="deskripsi"/></td>
+                                <td>deskripsi : </td> <td><input type="text" name="deskripsi"></td>
                             </tr>
                             <tr>
-                                <td>gambar1 : </td> <td><input type="file" name="gambar1"/></td>
+                                <td>Gambar 1 : </td><td><input type="file" name="gambar1"></td>
                             </tr>
                             <tr>
-                                <td>gambar2 : </td><td><input type="file" name="gambar2"/></td>
-                            </tr>
-                        </table>
-                        <table>
-                            <tr>
-                                <td>tag1 : <input type="text" name="tag1"/></td>
-                                <td>tag3 : <input type="text" name="tag3"/></td>
+                                <td>Gambar 2 : </td><td><input type="file" name="gambar2"></td>
                             </tr>
                             <tr>
-                                <td>tag2 : <input type="text" name="tag2"/></td>
-                                <td>tag4 : <input type="text" name="tag4"/></td>
+                                <td>tag1 : <input type="text" name="tag1"></td>
+                                <td>tag3 : <input type="text" name="tag3"></td>
+                            </tr>
+                            <tr>
+                                <td>tag2 : <input type="text" name="tag2"></td>
+                                <td>tag4 : <input type="text" name="tag4"></td>
                             </tr>
                         </table>
                         <input type="submit" value="Buat!" class="button2">
                     </form>
                   </div>
                   <div id="nav_right" class="grid_5">
-                    <div id="pencarian_mini">
-                       <form id="cari" method="GET" action="hasil-pencarian.html">
-                        
-                          <input  type="text" name="search" placeholder="Kata Pencarian" autocomplete="off"  <?php if($_GET[carian]== "wew")echo "value='1'"; ?><br>
-                        
-                          <input type="submit" value="Cari" class="button3"/>
-                        
-                       </form>
+                   
                     </div>
-                     <div id="daftar_iklan">
-                       
-                        
-                    </div>
-  
-                  </div>
+                     
 
                 </div>
 
