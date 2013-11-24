@@ -55,14 +55,14 @@
                   <div id="content" class="grid_24">
 
                     <div id="pencarian" class="grid_18">
-                       <form id="cari" action="hasil-pencarian.php" method="GET">
+                       <form id="cari" method="POST" action="hasil-pencarian.php">
                         
-                          <input  type="text"  placeholder="Kata Pencarian" autocomplete="off"></input>
+                          <input  type="text"  placeholder="Kata Pencarian" autocomplete="off" name="pencarian"/>
                         
-                          <input type="submit" value="Cari">
+                          <input type="submit" value="Cari" class="button2">
                         
-                          <select id="provinsi">
-                            <option value="semua-kategori">Semua provinsi</option>
+                          <select id="provinsi" name="provinsi">
+                            <option value="semua-provinsi">Semua provinsi</option>
                             <option value="aceh">Aceh</option>
                             <option value="bali">Bali</option>
                             <option value="belitung">Bangka Belitung</option>
@@ -99,17 +99,21 @@
                             
                           </select> 
 
-                           <select id="Kategori">
+                           <select id="Kategori" name="kategori">
                             <option value="semua-kategori">Semua Kategori</option>
                             <option value="Kendaraan">Kendaraan</option>
                             <option value="properti">Properti</option>
                             <option value="fashion">Fashion</option>
-                            <option value="elektronikgadget">Elektronik dan Gadget</option>
+                            <option value="elektronik">Elektronik dan Gadget</option>
                             <option value="kecantikankesehatan">Kecantikan dan Kesehatan</option>
                             <option value="hobiolahraga">Hobi dan Olahraga</option>
                             <option value="rumahtangga">Rumah Tangga</option>
                             <option value="hewanpeliharaan">Hewan Peliharaan</option>
-                            </select> 
+                     
+                          </select> 
+                           
+
+
                         
                        </form>
 

@@ -1,0 +1,31 @@
+===========================
+Note : agenda bagi developer
+
+jika agenda selesai mohon diberi tanda bintang di belakang
+Jika ada yang menurutmu kurang, tulis aja di bawahnya
+ada comment atau apa gitu juga ditulis aja di bawah sendiri
+===========================
+
+
+1. Standardisasi huruf kapital penamaan kategori dan provinsi,
+di database ada yang besar ada yang kecil. Selain itu, validasi nama" propinsi supaya benar adanya.
+
+2. Pembagusan CSS
+-> Link - link html diberi clear formatting supaya ga mencolok warna birunya sama underline nya
+-> diganti sama pas hover beda warna mungkin?
+
+3. Informasi pada halaman pencarian kurang, hasil pencarian harusnya menampilkan provinsi dan kategori lagi untuk memastikan kebenaran.
+
+4. !important > halaman rincian.php belum ada
+
+5. halaman-saya.php juga belum selesai
+-> penambahan edit profil secara lengkap, dikasih value awal jika ada. Session untuk login mending id saja, jangan username, supaya bisa ditaroh di address juga
+-> penambahan cek status, status dari user apa aja jadinya? kita aktifkan secara manual kan sebagai admin?
+
+6. Pemberian pengamanan terhadap injection di fitur search, login, sama semua yang bisa diinputin sama user.
+
+
+====================================
+comment
+
+Andre - Di sini nek meh comment

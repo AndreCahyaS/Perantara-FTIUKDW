@@ -55,9 +55,9 @@
                 <div id="content" class="grid_24">
                     <div id="pencarian" class="grid_18">
 
-                       <form id="cari" method="GET" action="hasil-pencarian.php">
+                       <form id="cari" method="POST" action="hasil-pencarian.php">
                         
-                          <input  type="text"  placeholder="Kata Pencarian" autocomplete="off" name="search"/>
+                          <input  type="text"  placeholder="Kata Pencarian" autocomplete="off" name="pencarian"/>
                         
                           <input type="submit" value="Cari" class="button2">
                         
@@ -104,7 +104,7 @@
                             <option value="Kendaraan">Kendaraan</option>
                             <option value="properti">Properti</option>
                             <option value="fashion">Fashion</option>
-                            <option value="elektronikgadget">Elektronik dan Gadget</option>
+                            <option value="elektronik">Elektronik dan Gadget</option>
                             <option value="kecantikankesehatan">Kecantikan dan Kesehatan</option>
                             <option value="hobiolahraga">Hobi dan Olahraga</option>
                             <option value="rumahtangga">Rumah Tangga</option>
@@ -119,52 +119,61 @@
                     </div>
                     <div id="hasil-pencarian" class="grid_18">
                          <?php 
-                         if(isset($_GET['provinsi']) || isset($_GET['pencarian']))
-                            if ($_GET['provinsi'] == "semua-provinsi") {
-                                $provinsi = "!= '".$_GET['provinsi']."'";
+
+                         if(isset($_POST['provinsi']) || isset($_POST['pencarian']))
+                         {
+                            if ($_POST['provinsi'] == "semua-provinsi") {
+                                $provinsi = "NOT LIKE '".$_POST['provinsi']."'";
                             }
                             else
                             {
-                                $provinsi = "= '".$_GET['provinsi']."'";
+                                $provinsi = "LIKE '".$_POST['provinsi']."'";
+                                
                             }
                             
-                            if($_GET['kategori'] == "semua-kategori")
+                            if($_POST['kategori'] == "semua-kategori")
                             {
-                                $kategori = "!= '".$_GET['kategori']."'";
+                                $kategori = "NOT LIKE '".$_POST['kategori']."'";
                             }
                             else
                             {
-                                $kategori = "= '".$_GET['kategori']."'";
+                                $kategori = "LIKE '".$_POST['kategori']."'";
                             }
 
-                            if($_GET['pencarian'] == "")
+                            if($_POST['pencarian'] == "")
                             {
-                                $pencarian = "!= '".$_GET['pencarian']."'";
+                                $pencarian = "NOT LIKE ''";
+                                
                             }
                             else
                             {
-                                $pencarian = "= '".$_GET['pencarian']."'";
+                                $pencarian = "LIKE '%".$_POST['pencarian']."%'";
                             }
 
-                            $query = "SELECT * FROM post WHERE deskripsi ".$pencarian." OR judul ".$pencarian." OR tag1 ".$pencarian." AND provinsi ".$provinsi." AND kategori ".$kategori
-                            $res = mysql_query($query)
+                            $query = "SELECT * FROM topik WHERE (isi ".$pencarian." OR title ".$pencarian." OR tag1 ".$pencarian.") AND propinsi ".$provinsi." AND kategori ".$kategori;
+                            $res = mysql_query($query);
 
+                            //$_SESSION['pencarian'] = $res;
+                            //$_SESSION['halaman-pencarian'] = 1;
                             $total = mysql_num_rows($res);
-
+                         
                          ?>
                          <div id="jumlah">Ditemukan <?php echo $total ?> hasil dari pencarian</div>
                          <div class="clear"></div>
                             <?php 
                                 while($data = mysql_fetch_assoc($res))
                                 {
-                                    echo '<a href="rincian.php?id='.$data['id'].
+                                    /*if($_SESSION['halaman-pencarian']-1 == ($_SESSION['total-pencarian']-1)/5)
+                                    {*/
+                                    //echo '<a href="rincian.php?id='.$data['id_topik'].'>';
                             ?>
                          <div class="hasil">
-                                    <img src="<?php echo $data['gambar'] ?>" title="<?php echo $data['judul'] ?>">
+                                <a href="rincian.php?id=<?php echo $data['id_topik'] ?>">
+                                    <img src="<?php if(isset($data['gambar1'])){ echo "image/".$data['gambar1'];} else{echo image/$data['gambar2'];} ?>" title="<?php echo $data['title']; ?>">
 
                                     <p>
                                         <?php
-                                            echo $data['deskripsi'];
+                                            echo $data['isi'];
                                         ?>
                                         <!-- Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -173,15 +182,17 @@
                                     cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
                                     proident, sunt in culpa qui officia deserunt mollit anim id est laborum. -->
                                     </p>
-
+                                </a>
                          </div>
                             <?php 
-                                    '"></a>';
+                                    //echo '</a>';
+                                    //}
                                 }
+                            }
                             ?>
 
                          <?php if(isset($_SESSION['user'])){ ?><a href="iklan-baru.php" class="button2">Buat Iklan Baru</a>  <?php } ?>
-
+                         <!-- <button></button><a href="hasil-pencarian.php?page=<?php //echo (mysql_num_rows($_SESSION['pencarian'])/5) ?>"></a> -->
                     </div>
 
                 </div>
