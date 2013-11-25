@@ -154,15 +154,13 @@
                                # $query = "SELECT * FROM topik WHERE id_topik='".$numbers[$i]."'" or die('disni');
                                # $hasilquery = mysql_query($query) or die('gagal disini');
 
-                                while($data=mysql_fetch_assoc($hasilquery))
+                                 while($data=mysql_fetch_assoc($hasilquery))
                                 { 
-                                   ?>
-                                    <div class="iklandepan grid_5">
-                                    <a href="pages?id=<?php echo $data['id_topik']; ?>"
+                                   ?><div class="iklandepan grid_5">
+                                    <a href="pages.php?id=<?php echo $data['id_topik']; ?>"
                                     
                                     <strong><?php echo $data['title']; ?></strong><br/>
                                     <img src="image/<?php echo $data['gambar1'];?>" width=150>
-                                    
                                    <div class="isiiklan"> 
                                     <?php echo $data['isi'];?></div>
 
