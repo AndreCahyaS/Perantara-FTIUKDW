@@ -39,6 +39,7 @@
                                                 <label for="password">password</label><input type="password" name="password" class="placeholder" placeholder="Kata Sandi"><br/>
                                                 <input type="submit" value="Masuk">
                                         </form>
+                                        <a href="register.php"><input type="submit" value="Daftar"></a>
                                 <?php
                                         }
                                 ?>
