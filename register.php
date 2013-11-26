@@ -16,12 +16,14 @@
         $hash = $hasher->HashPassword($password);
         $pass = sha1($password);
 
-       $query = "INSERT INTO `u957988429_a`.`user` (`user_id` ,`username` ,`nama` ,`email` ,`password` ,`joindate`)VALUES (NULL,  '".$username."',  
-        '".$nama."',  '".$email."',  '".$pass."', CURRENT_TIMESTAMP)";
+       $query = "INSERT INTO `u957988429_a`.`user` (`user_id` ,`username` ,`nama` ,`email` ,`password` ,`joindate`)VALUES (NULL,  ?,  ?,  ?,  '".$pass."', CURRENT_TIMESTAMP)";
 
 
-        $res = mysql_query($query) or die("gagal Query disini");
+         $stmt = mysqli_prepare($mysqli, $query);
 
+         mysqli_stmt_bind_param($stmt, "sss", $username, $nama, $email);
+          $res = mysqli_stmt_execute($stmt);
+    
         if($res) { echo "Berhasil ditambah";
 }
         else echo("gagal tambah");

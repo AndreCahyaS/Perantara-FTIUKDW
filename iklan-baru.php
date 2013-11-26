@@ -28,6 +28,8 @@
             $dir = "image/"; 
             $namagambar1 = sha1($username.$date1).$_FILES["gambar1"]["name"];
             $namagambar2 = sha1($username.$date2).$_FILES["gambar2"]["name"];
+            $gambar1type = $_FILES['gambar1']["type"];
+            $gambar2type = $_FILES['gambar2']["type"];
             if($gambar1type == "image/jpeg" || $gambar1type == "image/pjpeg" || $gambar1type == "image/x-png" || $gambar1type == "image/gif" || $gambar2type == "image/jpeg" || $gambar2type == "image/pjpeg" || $gambar2type == "image/x-png" || $gambar2type == "image/gif") { 
  
             move_uploaded_file($_FILES["gambar1"]["tmp_name"], $dir.$namagambar1);
@@ -38,12 +40,35 @@
                 $namagambar2 = NULL;
             }
         }
-            echo $namagambar1;
-            echo $namagambar2;
-        $query = "INSERT INTO `u957988429_a`.`topik` (`id_topik` ,`title` ,`isi` ,`date` ,`kategori` ,`username` ,`nego` ,`kondisi` ,`propinsi` ,`tag1` ,`tag2` ,`tag3` ,`tag4` ,`status` ,`harga` ,`gambar1` ,`gambar2`)
-VALUES (NULL , '".$judul."', '".$deskripsi."', CURRENT_TIMESTAMP , '".$kategori."', '".$username."', '".$nego."', '".$kondisi."', '".$propinsi."', '".$tag1."', '".$tag2."', '".$tag3."', '".$tag4."', '".$status."', '".$harga."', '".$namagambar1."' , '".$namagambar2."')";
 
-        $res = mysql_query("$query") or die("gagal query post");
+        $query = "INSERT INTO `u957988429_a`.`topik` (
+`id_topik` ,
+`title` ,
+`isi` ,
+`date` ,
+`kategori` ,
+`username` ,
+`nego` ,
+`kondisi` ,
+`propinsi` ,
+`tag1` ,
+`tag2` ,
+`tag3` ,
+`tag4` ,
+`status` ,
+`harga` ,
+`gambar1` ,
+`gambar2`
+)
+VALUES (
+NULL , ?, ?,
+CURRENT_TIMESTAMP , '".$kategori."', '".$username."', '".$nego."', '".$kondisi."', '".$propinsi."', ?, ?, ?, ?, '".$status."', ?, '".$namagambar1."' , '".$namagambar2."'
+);";
+        $stmt = mysqli_prepare($mysqli, $query);
+
+        mysqli_stmt_bind_param($stmt, "sssssss", $judul, $deskripsi, $tag1, $tag2, $tag3, $tag4, $harga) or die(mysqli_error);
+        $res = mysqli_stmt_execute($stmt);
+    
 
         if ($res)
         {
