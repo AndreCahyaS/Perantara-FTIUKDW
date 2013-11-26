@@ -15,7 +15,6 @@
 
 
 
-	$mysqli = new mysqli($host, $user, $pass, $database_name)or die( "Unable to select database");
 
 	$stmt = mysqli_prepare($mysqli, $query);
 
