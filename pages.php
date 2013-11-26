@@ -28,7 +28,7 @@
                                      {
                                         $username = $_SESSION['user'];
                                         echo "Hello , " .$username;
-                                        header("Location:index.php");
+                                        
                                  ?>
                                  <a href="logout.php"> <button>Logout</button></a>
                                 <?php

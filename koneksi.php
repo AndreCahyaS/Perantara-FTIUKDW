@@ -11,6 +11,9 @@
 	mysql_select_db($database_name) or die(header("location:maintenis.php"));
 
 	
+	$mysqli = new mysqli($host, $user, $pass, $database_name)or die( "Unable to select database");
+
+	
 
 ?>
 
