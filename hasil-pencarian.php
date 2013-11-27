@@ -55,7 +55,7 @@
                 <div id="content" class="grid_24">
                     <div id="pencarian" class="grid_18">
 
-                       <form id="cari" method="POST" action="hasil-pencarian.php">
+                       <form id="cari" method="GET" action="hasil-pencarian.php">
                         
                           <input  type="text"  placeholder="Kata Pencarian" autocomplete="off" name="pencarian"/>
                         
@@ -119,46 +119,76 @@
                     </div>
                     <div id="hasil-pencarian" class="grid_18">
                          <?php 
-
-                         if(isset($_POST['provinsi']) || isset($_POST['pencarian']))
+                         $dataPerPage = 5;
+                         if(isset($_GET['page'])) {
+                         $noPage = $_GET['page'];
+                         }
+                        else $noPage = 1;
+                        $offset = ($noPage - 1) * $dataPerPage;
+                
+                         if(isset($_GET['provinsi']) || isset($_GET['pencarian']))
                          {
-                            if ($_POST['provinsi'] == "semua-provinsi") {
-                                $provinsi = "NOT LIKE '".$_POST['provinsi']."'";
+                            if ($_GET['provinsi'] == "semua-provinsi") {
+                                $provinsi = "NOT LIKE '".$_GET['provinsi']."'";
+                                $provinsia = $_GET['provinsi'];
                             }
                             else
                             {
-                                $provinsi = "LIKE '".$_POST['provinsi']."'";
+                                $provinsi = "LIKE '".$_GET['provinsi']."'";
+                                $provinsia = $_GET['provinsi'];
                                 
                             }
                             
-                            if($_POST['kategori'] == "semua-kategori")
+                            if($_GET['kategori'] == "semua-kategori")
                             {
-                                $kategori = "NOT LIKE '".$_POST['kategori']."'";
+                                $kategori = "NOT LIKE '".$_GET['kategori']."'";
+                                $kategoria = $_GET['kategori'];
+
                             }
                             else
                             {
-                                $kategori = "LIKE '".$_POST['kategori']."'";
+                                $kategori = "LIKE '".$_GET['kategori']."'";
+                                $kategoria = $_GET['kategori'];
                             }
 
-                            if($_POST['pencarian'] == "")
+                            if($_GET['pencarian'] == "")
                             {
                                 $pencarian = "NOT LIKE ''";
+                                $pencariana = "";
                                 
                             }
                             else
                             {
-                                $pencarian = "LIKE '%".$_POST['pencarian']."%'";
+                                $pencariana = $_GET['pencarian'];
+                                $pencarian = "LIKE '%".$_GET['pencarian']."%'";
                             }
 
-                            $query = "SELECT * FROM topik WHERE (isi ".$pencarian." OR title ".$pencarian." OR tag1 ".$pencarian.") AND propinsi ".$provinsi." AND kategori ".$kategori;
+                            $query = "SELECT * FROM topik WHERE (isi ".$pencarian." OR title ".$pencarian." OR tag1 ".$pencarian.") AND propinsi ".$provinsi." AND kategori ".$kategori." LIMIT $offset, $dataPerPage";
                             $res = mysql_query($query);
-
+                            $query2 = "SELECT * FROM topik WHERE (isi ".$pencarian." OR title ".$pencarian." OR tag1 ".$pencarian.") AND propinsi ".$provinsi." AND kategori ".$kategori."";
+                            $res2 = mysql_query($query2);    
                             //$_SESSION['pencarian'] = $res;
                             //$_SESSION['halaman-pencarian'] = 1;
-                            $total = mysql_num_rows($res);
+                            $total = mysql_num_rows($res2);
                          
                          ?>
                          <div id="jumlah">Ditemukan <?php echo $total ?> hasil dari pencarian</div>
+                         <?php 
+                         $jumPage = ceil($total/$dataPerPage);
+                         if ($noPage > 1) echo  "<a href='".$_SERVER['PHP_SELF']."?page=".($noPage-1)."'>&lt;&lt; Prev</a>";
+                         for($page = 1; $page <= $jumPage; $page++)
+                            {
+                                     if ((($page >= $noPage - 3) && ($page <= $noPage + 3)) || ($page == 1) || ($page == $jumPage))
+                                     {
+                                        if (($noPage == 1) && ($page != 2))  echo "...";
+                                        if (($noPage != ($jumPage - 1)) && ($page == $jumPage))  echo "...";
+                                        if ($page == $noPage) echo " <b>".$page."</b> ";
+                                        else echo " <a href='".$_SERVER['PHP_SELF']."?page=".$page."&pencarian=".$pencariana."&provinsi=".$provinsia."&kategori=".$kategoria."'>".$page."</a> ";
+                                        $noPage = $page;
+                                     }
+                            }
+
+                         ?>
                          <div class="clear"></div>
                             <?php 
                                 while($data = mysql_fetch_assoc($res))

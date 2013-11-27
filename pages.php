@@ -57,10 +57,16 @@
                     <?php 
                         if(isset($_GET['id'])) {
                               $id = $_GET['id'];
-                            $query = "SELECT * FROM topik WHERE id_topik='".$id."'";
-                            $hasilquery = mysql_query($query);
+                            $query = "SELECT * FROM topik WHERE id_topik=?";
+                           
 
-                                while($data=mysql_fetch_assoc($hasilquery))
+                             $stmt = mysqli_prepare($mysqli, $query);
+
+                            mysqli_stmt_bind_param($stmt, 'i', $id) or die(mysqli_error);
+                            mysqli_stmt_execute($stmt);
+                            $result = mysqli_stmt_get_result($stmt);
+
+                                while($data=mysqli_fetch_array($result))
                                 { 
 
                             ?>
@@ -115,7 +121,7 @@
                              </div>
                              <?php
                            }
-                        } else {
+                        } if(!$data=mysqli_fetch_array($result)) {
                           echo "<h1>Maaf Post tidak ada</h1>";
                         }
 
