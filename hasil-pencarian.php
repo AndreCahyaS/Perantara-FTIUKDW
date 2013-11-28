@@ -199,7 +199,7 @@
                             ?>
                          <div class="hasil">
                                 <a href="rincian.php?id=<?php echo $data['id_topik'] ?>">
-                                    <img src="<?php if(isset($data['gambar1'])){ echo "image/".$data['gambar1'];} else{echo image/$data['gambar2'];} ?>" title="<?php echo $data['title']; ?>">
+                                    <img src="<?php if(isset($data['gambar1'])){ echo "image/".$data['gambar1'];} else if(isset($data['gambar2'])){echo image/$data['gambar2'];} else echo 'image/no-image.jpg' ?>" title="<?php echo $data['title']; ?>">
 
                                     <p>
                                         <?php
