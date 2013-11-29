@@ -221,13 +221,12 @@
                                     //echo '<a href="rincian.php?id='.$data['id_topik'].'>';
                             ?>
                          <div class="hasil">
-<<<<<<< HEAD
+
+                                
+
                                 <a href="pages.php?id=<?php echo $data['id_topik'] ?>">
-                                    <img src="<?php if(isset($data['gambar1'])){ echo "image/".$data['gambar1'];} else{echo image/$data['gambar2'];} ?>" title="<?php echo $data['title']; ?>">
-=======
-                                <a href="rincian.php?id=<?php echo $data['id_topik'] ?>">
                                     <img src="<?php if(isset($data['gambar1'])){ echo "image/".$data['gambar1'];} else if(isset($data['gambar2'])){echo image/$data['gambar2'];} else echo 'image/no-image.jpg' ?>" title="<?php echo $data['title']; ?>">
->>>>>>> dda1ae600de18ee76423e42c954188668198d6bf
+
 
                                     <p>
                                         <?php
