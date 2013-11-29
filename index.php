@@ -55,7 +55,7 @@
                   <div id="content" class="grid_24">
 
                     <div id="pencarian" class="grid_18">
-                       <form id="cari" method="POST" action="hasil-pencarian.php">
+                       <form id="cari" method="GET" action="hasil-pencarian.php">
                         
                           <input  type="text"  placeholder="Kata Pencarian" autocomplete="off" name="pencarian"/>
                         
