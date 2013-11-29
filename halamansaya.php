@@ -1,3 +1,8 @@
+<?php
+
+
+?>
+
 <html>
 <head>
 	<title>Perantara - Tempat Menyenangkan Untuk Jual Beli Online</title>
@@ -5,15 +10,15 @@
 	<meta name="description" content"jual beli jualbeli iklan postiklan gratis iklangratis">
 	<meta charset="UTF-8">
 
-	<?
-		php session_start()
-		if(!isset($_SESSION['user'])) header("location:intruder.php")
+	<?php session_start();
+		if(!isset($_SESSION['user'])) header("LOCATION:intruder.php")
 	?>
 
 	<link rel="stylesheet" type="text/css" href="css/halamansaya.css">
 	<link rel="stylesheet" type="text/css" href="css/headerfooter.css">
     <link rel="stylesheet" href="css/960_24_col.css" type="text/css"/>
-
+    <script type="text/javascript" src="jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="js/javascript.js"></script>
 </head>
 <body>
 	<div id="wrap" class="container_24">
@@ -25,7 +30,6 @@
                 <div id="masuk" class="grid_5">
                                  <?php
                                     include("koneksi.php");
-                                    session_start();
                                     if(isset($_SESSION['user']))
                                      {
                                         $username = $_SESSION['user'];
@@ -56,9 +60,9 @@
 				<?php
 					echo '
 						<ul>
-							<li><a href="halaman-saya.php">Profil Saya</a></li>
-							<li><a href="ubahpass.php">Ubah Password</a></li>
-							<li><a href="cekstat.php">Cek Status</a></li>
+							<li><a id="halsaya" href="#">Profil Saya</a></li>
+							<li><a id="ubahpass"href="#">Ubah Password</a></li>
+							
 						</ul>
 						  '
 				?>
@@ -66,89 +70,74 @@
 			</div>
 			<div id="center" class="grid_11">
 
-				<?php 
-					echo "upload gambar <br>";
-					
-					if (isset($_FILES['pp']))
-					{
-						$dir = 'userimage/';
-						if ( $_FILES['pp']['size'] != 0)
-						{
-							$uploadpp = $dir.$_FILES['pp']['name'];
-							if ($_FILES['pp']['type'] == "image/jpg")
-							{
-								if (move_uploaded_file($_FILES['pp']['tmp_name'], $uploadpp))
-								{
-									echo "Upload berhasil<br/>";
-									#$query = "UPDATE ";
-									#$res = mysql_query($query);
-								}
-								else
-								{
-									echo "Upload gagal<br/>";
-								}
-							}
-							else
-								echo "file yang diupload tidak berekstensi jpg <br/>";
-						}
-					}
-
-				#	$query = "SELECT path FROM  WHERE userid LIKE '".$_SESSION['user']."'";
-				#	$res = mysql_query($query) or die("gagal memuat gambar");
-
-				#	echo "<img src='".$dir.$res."'>";
-
-				 ?>
-
-				<form action="halamansaya.php" method="POST" enctype="multipart/form-data">
-					<input type="file" name="pp"><br>
-					<input type="submit" value="upload">
-				</form>
-
-				<form>
+				<div id="halamansaya">
+				<form method="post" action="halamansaya.php">
 					<?php
-						$query = "SELECT * FROM user WHERE id LIKE '".$_SESSION."'";
-						$res = mysql_query($query);
+						$query = "SELECT * FROM user WHERE username LIKE '".$_SESSION['user']."'";
+						$res = mysql_query($query) or die("gagal query res");
 
 						while($data=mysql_fetch_assoc($res))
 						{
 
 					?>
-
+					<table>
 					<!-- <label>Username</label><input type="text" value="<?php //$data[username]; ?>"/><br> -->
-					<label>Nama lengkap</label><input type="text" value="<?php $data[nama]; ?>"/><br>
-					<label>email</label><input type="text" value="<?php $data[email]; ?>"/><br>
-					<label>Nomor Telepon</label><input type="text" value="<?php $data[telepon]; ?>"/><br>
+					<tr>
+						<td><label>Nama lengkap</label></td><td><input type="text" value="<?php echo $data['nama']; ?>" name="nama"/></td>
+					</tr>
+					<tr>
+						<td><label>email</label></td><td><input type="text" value="<?php echo $data['email']; ?>" name="email"/><br></td>
+					</tr>
+					<tr>
+						<td><label>Nomor Telepon</label></td><td><input type="text" value="<?php echo $data['telepon']; ?>" name="telpon"/><br></td>
+					</tr>
 					<!-- <label>Rating</label><input type="text" value="<?php //$data[rating]; ?>"/> -->
-						<input type="submit" value="Ubah"/>
+						<tr><td><input type="submit" value="Ubah"/></td></tr>
+					</table>
 					<?php
 						}
 					?>
 
 				</form>
+			</div>
+
+			<div id="ubahpassword">
+				<form method="post" action="halamansaya.php">
+				
+					<table>
+					<!-- <label>Username</label><input type="text" value="<?php //$data[username]; ?>"/><br> -->
+					<tr>
+						<td><label>Password Lama</label></td><td><input type="text" name="passlama"/><br></td>
+					</tr>
+					<tr>
+						<td><label>Password Baru</label></td><td><input type="text" name="passbaru"/><br></td>
+					</tr>
+					<!-- <label>Rating</label><input type="text" value="<?php //$data[rating]; ?>"/> -->
+						<tr><td><input type="submit" value="Ubah"/></td></tr>
+					</table>
+
+				</form>
+
+			</div>
+
 
 			</div>
 
 			<div id="navRight" class="grid_6">
-				<div id="pencarian">
-					<form action="pencarian.php" method="GET">
-						<input type="textbox" name="kuncicari">
-						<input type="button" value="cari"/>
-					</form>
-				</div>
+				
                     <div id="daftar_iklan">
                         Iklan saya
                             <?php 
 
-                            	$query = "SELECT * FROM topik WHERE user_make LIKE '".$_SESSION['userid']."'";
+                            	$query = "SELECT * FROM topik WHERE username LIKE '".$_SESSION['user']."'";
                             	$res = mysql_query($query);
 
-                            	while($data = mysql_fetch_assoc($res)
+                            	while($data = mysql_fetch_assoc($res))
                             	{
-                            		echo "<a href='pages.php?id=".$data['id_topik']."'>".$data['title']."</a>";
+                            		echo "</br><a href='pages.php?id=".$data['id_topik']."'>".$data['title']."</a></br>";
                             	}
                             ?>
-                        <a href="iklan-baru.php"> buat iklan</a>
+                        <a href="iklan-baru.php"><button>Buat Iklan</button></a>
                     </div>
 			</div>
 		</div>
