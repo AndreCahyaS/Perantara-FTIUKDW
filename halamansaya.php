@@ -1,5 +1,42 @@
 <?php
+include("koneksi.php");
+session_start();
+if(!isset($_SESSION['user'])) header("LOCATION:intruder.php");
+$username = $_SESSION['user'];
+$hasil = "";
 
+if(isset($_POST['passbaru'])) {
+	$passbaru = sha1($_POST['passbaru']);
+	$query = "UPDATE `u957988429_a`.`user` SET password = ? WHERE username =?";
+
+	$stmt = mysqli_prepare($mysqli, $query);
+
+    mysqli_stmt_bind_param($stmt, "ss", $passbaru, $username) or die(mysqli_error);
+        $res = mysqli_stmt_execute($stmt);
+    
+
+        if ($res)
+        { 
+        	$hasil = "Password berhasil diubah";
+        }
+}	
+
+if(isset($_POST['nama']) && isset($_POST['email']) && isset($_POST['telpon'])) {
+	$nama = $_POST['nama'];
+	$email = $_POST['email'];
+	$telpon = $_POST['telpon'];
+	$query = "UPDATE `u957988429_a`.`user` SET nama = ?,email = ?,telepon = ? WHERE username =?";
+	$stmt = mysqli_prepare($mysqli, $query);
+
+    mysqli_stmt_bind_param($stmt, "ssss", $nama, $email, $telpon, $username) or die(mysqli_error);
+        $res = mysqli_stmt_execute($stmt);
+    
+
+        if ($res)
+        { 
+        	$hasil = "Data berhasil diubah";
+        }
+}
 
 ?>
 
@@ -9,10 +46,6 @@
 
 	<meta name="description" content"jual beli jualbeli iklan postiklan gratis iklangratis">
 	<meta charset="UTF-8">
-
-	<?php session_start();
-		if(!isset($_SESSION['user'])) header("LOCATION:intruder.php")
-	?>
 
 	<link rel="stylesheet" type="text/css" href="css/halamansaya.css">
 	<link rel="stylesheet" type="text/css" href="css/headerfooter.css">
@@ -29,7 +62,7 @@
                 </div>
                 <div id="masuk" class="grid_5">
                                  <?php
-                                    include("koneksi.php");
+                                    
                                     if(isset($_SESSION['user']))
                                      {
                                         $username = $_SESSION['user'];
@@ -69,14 +102,21 @@
 
 			</div>
 			<div id="center" class="grid_11">
-
+				<?php echo $hasil; ?>
 				<div id="halamansaya">
 				<form method="post" action="halamansaya.php">
 					<?php
-						$query = "SELECT * FROM user WHERE username LIKE '".$_SESSION['user']."'";
-						$res = mysql_query($query) or die("gagal query res");
+						$query = "SELECT * FROM user WHERE username LIKE ?";
+						$username = $_SESSION['user'];
 
-						while($data=mysql_fetch_assoc($res))
+						$stmt = mysqli_prepare($mysqli, $query) or die(mysqli_error($mysqli));
+
+                        mysqli_stmt_bind_param($stmt, "s", $username) or die(mysqli_error($mysqli));
+
+                        mysqli_stmt_execute($stmt) or die(mysqli_error($mysqli));;
+                        $result = mysqli_stmt_get_result($stmt);
+
+						while($data=mysqli_fetch_assoc($result))
 						{
 
 					?>
@@ -107,10 +147,7 @@
 					<table>
 					<!-- <label>Username</label><input type="text" value="<?php //$data[username]; ?>"/><br> -->
 					<tr>
-						<td><label>Password Lama</label></td><td><input type="text" name="passlama"/><br></td>
-					</tr>
-					<tr>
-						<td><label>Password Baru</label></td><td><input type="text" name="passbaru"/><br></td>
+						<td><label>Password Baru</label></td><td><input type="password" name="passbaru"/><br></td>
 					</tr>
 					<!-- <label>Rating</label><input type="text" value="<?php //$data[rating]; ?>"/> -->
 						<tr><td><input type="submit" value="Ubah"/></td></tr>
@@ -129,10 +166,16 @@
                         Iklan saya
                             <?php 
 
-                            	$query = "SELECT * FROM topik WHERE username LIKE '".$_SESSION['user']."'";
-                            	$res = mysql_query($query);
+                            	$query = "SELECT * FROM topik WHERE username LIKE ?";
 
-                            	while($data = mysql_fetch_assoc($res))
+                            	$stmt = mysqli_prepare($mysqli, $query) or die(mysqli_error($mysqli));
+
+		                        mysqli_stmt_bind_param($stmt, "s", $username) or die(mysqli_error($mysqli));
+
+		                        mysqli_stmt_execute($stmt) or die(mysqli_error($mysqli));;
+		                        $result = mysqli_stmt_get_result($stmt);
+
+								while($data=mysqli_fetch_assoc($result))
                             	{
                             		echo "</br><a href='pages.php?id=".$data['id_topik']."'>".$data['title']."</a></br>";
                             	}
