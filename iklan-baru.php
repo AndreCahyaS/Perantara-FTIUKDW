@@ -107,13 +107,14 @@ CURRENT_TIMESTAMP , '".$kategori."', '".$username."', '".$nego."', '".$kondisi."
 
                           <div id="masuk" class="grid_5">
                                  <?php
-                                    include("koneksi.php");
                                     
                                     if(isset($_SESSION['user']))
                                      {
                                         $username = $_SESSION['user'];
-                                        echo "Hello , " .$username;
-                                 ?>
+                                         ?>
+                                        <h3>Hello ,<a href="halamansaya.php"><?php echo $username; ?></a></h3>
+
+                                
                                  <a href="logout.php"> <button>Logout</button></a>
                                 <?php
                                         }

@@ -61,15 +61,16 @@ if(isset($_POST['nama']) && isset($_POST['email']) && isset($_POST['telpon'])) {
                      <a href="home.php"> <img src="banner.jpeg" height="200" width="600"></a>
                 </div>
                 <div id="masuk" class="grid_5">
-                                 <?php
+                                <?php
                                     
                                     if(isset($_SESSION['user']))
                                      {
                                         $username = $_SESSION['user'];
-                                        echo "Hello , " .$username;
-                                 ?>
+                                         ?>
+                                        <h3>Hello ,<a href="halamansaya.php"><?php echo $username; ?></a></h3>
+
+                                
                                  <a href="logout.php"> <button>Logout</button></a>
-                                  <a href="iklan-baru.php"><input type="submit" value="Buat Iklan Baru"></a>
                                 <?php
                                         }
                                         else {
@@ -79,7 +80,6 @@ if(isset($_POST['nama']) && isset($_POST['email']) && isset($_POST['telpon'])) {
                                                 <label for="password">password</label><input type="password" name="password" class="placeholder" placeholder="Kata Sandi"><br/>
                                                 <input type="submit" value="Masuk">
                                         </form>
-                                        <a href="register.php"><input type="submit" value="Daftar"></a>
                                 <?php
                                         }
                                 ?>
