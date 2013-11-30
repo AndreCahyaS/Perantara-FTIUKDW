@@ -14,10 +14,11 @@
         <body>
                 <div id="wrap" class="container_24">
                 	<div id="header" class="grid_24">
-
+                      <a href="index.php">
                 		  <div id="banner" class="grid_18">
-                                  <a href="index.php"> <img src="banner.jpeg" height="200" width="600"></a>
+                                   <img src="banner.jpeg" height="200" width="600">
                       </div>
+                      </a>
 
                           <div id="masuk" class="grid_5">
                                  <?php
@@ -27,7 +28,7 @@
                                      {
                                         $username = $_SESSION['user'];
                                  ?>
-                                 <h3>Hello ,<a href="halamansaya.php"><?php echo $username; ?></a></h3>
+                                 <h3>Hello,<a href="halamansaya.php"><?php echo $username; ?></a></h3>
 
                                  <a href="logout.php"> <button>Logout</button></a>
                                   <a href="iklan-baru.php"><input type="submit" value="Buat Iklan Baru"></a>
@@ -157,16 +158,18 @@
 
                                  while($data=mysql_fetch_assoc($hasilquery))
                                 { 
-                                   ?><div class="iklandepan grid_5">
-                                    <a href="pages.php?id=<?php echo $data['id_topik']; ?>"
-                                    
+                                   ?>
+                                    <a href="pages.php?id=<?php echo $data['id_topik']; ?>">
+                                  
+                                   <div class="iklandepan grid_5">
+  
                                     <strong><?php echo $data['title']; ?></strong><br/>
                                     <img src="image/<?php echo $data['gambar1'];?>" width=150>
                                    <div class="isiiklan"> 
                                     <?php echo $data['isi'];?></div>
 
-                                    <a/>
                                     </div>
+                                    <a/>
                                     
                            <?php
                                  }
@@ -176,9 +179,9 @@
                     <div id="footer" class="grid_24">
                         
                                     <ul>
-                                            <li><a href="#" class="grid_4"><strong>Disclaimer</strong></a></li>
+                                            <li><a href="#" class="grid_4"><strong>Ketentuan</strong></a></li>
                                             <li><a href="#" class="grid_4"><strong>Petunjuk</strong></a></li>
-                                            <li><a href="#" class="grid_4"><strong>ABOUT US</strong></a></li>
+                                            <li><a href="#" class="grid_4"><strong>Tentang Kami</strong></a></li>
                                     </ul>
                     
                     </div>

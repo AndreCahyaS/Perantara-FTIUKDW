@@ -18,15 +18,21 @@ html
   margin = 0;
 }
 
+#banner a
+{
+  padding: 10px;
+}
+
 #content {
   margin-top: 40px;
 }
 
 
 #masuk {
-
+  text-align: center;
 	float : right;
 	border : 1px solid green;
+  padding: 4px;
 }
 
 #banner {

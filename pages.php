@@ -122,9 +122,9 @@
                              </div>
                              <?php
                            }
-                        } if(!$data=mysqli_fetch_array($result)) {
+                        } else //if(!$data=mysqli_fetch_array($result)) {
                           echo "<h1>Maaf Post tidak ada</h1>";
-                        }
+                        //}
 
                              ?>
                                         

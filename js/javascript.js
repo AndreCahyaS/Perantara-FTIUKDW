@@ -1,6 +1,5 @@
 $(document).ready(function(){
 	$("#ubahpassword").hide(5);
-	$("#halamansaya").hide(5);
 
 	
 	$("#halsaya").click(function(){

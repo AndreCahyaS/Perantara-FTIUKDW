@@ -58,7 +58,7 @@ if(isset($_POST['nama']) && isset($_POST['email']) && isset($_POST['telpon'])) {
 		<div id="header" class="grid_24">
 
                 <div id="banner" class="grid_18">
-                     <a href="home.php"> <img src="banner.jpeg" height="200" width="600"></a>
+                     <a href="index.php"> <img src="banner.jpeg" height="200" width="600"></a>
                 </div>
                 <div id="masuk" class="grid_5">
                                 <?php

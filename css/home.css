@@ -57,7 +57,19 @@
     border: solid 1px blue;
     padding: 1px;
     float : right;
+}
 
+.iklandepan a
+{
+    border:none;
+    margin:0px;
+    color:black;
+    text-decoration: none;
+}
+
+.iklandepan a:HOVER
+{
+    background-color: #aacdde;
 }
 
 #barang {
