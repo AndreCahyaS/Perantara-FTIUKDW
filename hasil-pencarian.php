@@ -138,31 +138,31 @@
 
                             if ($_GET['provinsi'] == "semua-provinsi" && $_GET['kategori'] == "semua-kategori") {
                                 
-                                $query = "SELECT * FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi NOT LIKE CONCAT('%', ?, '%') AND kategori NOT LIKE CONCAT('%', ?, '%') LIMIT $offset, $dataPerPage";
-                                $query2 = "SELECT * FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi NOT LIKE CONCAT('%', ?, '%') AND kategori NOT LIKE CONCAT('%', ?, '%')";
-                                
+                                $query = "SELECT * FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi NOT LIKE ? AND kategori NOT LIKE ? LIMIT $offset, $dataPerPage";
+                                $query2 = "SELECT * FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi NOT LIKE ? AND kategori NOT LIKE ?";
+                               
                                 
                             }
                             else if ($_GET['provinsi'] != "semua-provinsi" && $_GET['kategori'] != "semua-kategori") {
                                 
 
-                                $query = "SELECT * FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi LIKE CONCAT('%', ?, '%') AND kategori LIKE CONCAT('%', ?, '%') LIMIT $offset, $dataPerPage";
-                                $query2 = "SELECT * FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi LIKE CONCAT('%', ?, '%') AND kategori LIKE CONCAT('%', ?, '%')";
-                               
+                                $query = "SELECT * FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi LIKE ? AND kategori LIKE ? LIMIT $offset, $dataPerPage";
+                                $query2 = "SELECT * FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi LIKE ? AND kategori LIKE ?";
+                             
                             }
                             
                             else if($_GET['kategori'] == "semua-kategori" && $_GET['provinsi'] != "semua-provinsi")
                             {
-                               $query = "SELECT * FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi NOT LIKE CONCAT('%', ?, '%') AND kategori LIKE CONCAT('%', ?, '%') LIMIT $offset, $dataPerPage";
-                               $query2 = "SELECT * FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi NOT LIKE CONCAT('%', ?, '%') AND kategori LIKE CONCAT('%', ?, '%')";
+                               $query = "SELECT * FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi LIKE ? AND kategori NOT LIKE ? LIMIT $offset, $dataPerPage";
+                               $query2 = "SELECT * FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi LIKE ? AND kategori NOT LIKE ?";
                               
 
                             }
                             else if($_GET['kategori'] != "semua-kategori" && $_GET['provinsi'] == "semua-provinsi")
                             {
-                               $query = "SELECT * FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi LIKE CONCAT('%', ?, '%') AND kategori NOT LIKE CONCAT('%', ?, '%') LIMIT $offset, $dataPerPage";
-                               $query2 = "SELECT * FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi = ? AND kategori NOT LIKE CONCAT('%', ?, '%')";
-                              
+                               $query = "SELECT * FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi NOT LIKE ? AND kategori LIKE ? LIMIT $offset, $dataPerPage";
+                               $query2 = "SELECT * FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi NOT LIKE ? AND kategori LIKE ?";
+                             
                             }
 
                           
