@@ -58,7 +58,7 @@ if(isset($_POST['nama']) && isset($_POST['email']) && isset($_POST['telpon'])) {
 		<div id="header" class="grid_24">
 
                 <div id="banner" class="grid_18">
-                     <a href="index.php"> <img src="banner.jpeg" height="200" width="600"></a>
+                    <a href="index.php"> <img src="banner.jpeg" height="100" width="600"></a>
                 </div>
                 <div id="masuk" class="grid_5">
                                 <?php
@@ -67,10 +67,10 @@ if(isset($_POST['nama']) && isset($_POST['email']) && isset($_POST['telpon'])) {
                                      {
                                         $username = $_SESSION['user'];
                                          ?>
-                                        <h3>Hello ,<a href="halamansaya.php"><?php echo $username; ?></a></h3>
+                                       <h3>Hello,<a href="halamansaya.php"><?php echo $username; ?></a></h3>
 
-                                
                                  <a href="logout.php"> <button>Logout</button></a>
+                                  <a href="iklan-baru.php"><input type="submit" value="Buat Iklan Baru"></a>
                                 <?php
                                         }
                                         else {
@@ -106,7 +106,7 @@ if(isset($_POST['nama']) && isset($_POST['email']) && isset($_POST['telpon'])) {
 				<div id="halamansaya">
 				<form method="post" action="halamansaya.php">
 					<?php
-						$query = "SELECT * FROM user WHERE username LIKE ?";
+						$query = "SELECT `nama`, `email`, `telepon` FROM user WHERE username LIKE ?";
 						$username = $_SESSION['user'];
 
 						$stmt = mysqli_prepare($mysqli, $query) or die(mysqli_error($mysqli));
@@ -114,22 +114,21 @@ if(isset($_POST['nama']) && isset($_POST['email']) && isset($_POST['telpon'])) {
                         mysqli_stmt_bind_param($stmt, "s", $username) or die(mysqli_error($mysqli));
 
                         mysqli_stmt_execute($stmt) or die(mysqli_error($mysqli));;
-                        $result = mysqli_stmt_get_result($stmt);
-
-						while($data=mysqli_fetch_assoc($result))
-						{
+                       $stmt->bind_result($nama, $email, $telepon);  // <-- one param for each field returned
+                            while ($stmt->fetch()) {
+						
 
 					?>
 					<table>
 					<!-- <label>Username</label><input type="text" value="<?php //$data[username]; ?>"/><br> -->
 					<tr>
-						<td><label>Nama lengkap</label></td><td><input type="text" value="<?php echo $data['nama']; ?>" name="nama"/></td>
+						<td><label>Nama lengkap</label></td><td><input type="text" value="<?php echo $nama; ?>" name="nama"/></td>
 					</tr>
 					<tr>
-						<td><label>email</label></td><td><input type="text" value="<?php echo $data['email']; ?>" name="email"/><br></td>
+						<td><label>email</label></td><td><input type="text" value="<?php echo $email; ?>" name="email"/><br></td>
 					</tr>
 					<tr>
-						<td><label>Nomor Telepon</label></td><td><input type="text" value="<?php echo $data['telepon']; ?>" name="telpon"/><br></td>
+						<td><label>Nomor Telepon</label></td><td><input type="text" value="<?php echo $telepon; ?>" name="telpon"/><br></td>
 					</tr>
 					<!-- <label>Rating</label><input type="text" value="<?php //$data[rating]; ?>"/> -->
 						<tr><td><input type="submit" value="Ubah"/></td></tr>
@@ -166,18 +165,16 @@ if(isset($_POST['nama']) && isset($_POST['email']) && isset($_POST['telpon'])) {
                         Iklan saya
                             <?php 
 
-                            	$query = "SELECT * FROM topik WHERE username LIKE ?";
+                            	$query = "SELECT `id_topik`, `title` FROM topik WHERE username LIKE ?";
 
                             	$stmt = mysqli_prepare($mysqli, $query) or die(mysqli_error($mysqli));
 
 		                        mysqli_stmt_bind_param($stmt, "s", $username) or die(mysqli_error($mysqli));
 
 		                        mysqli_stmt_execute($stmt) or die(mysqli_error($mysqli));;
-		                        $result = mysqli_stmt_get_result($stmt);
-
-								while($data=mysqli_fetch_assoc($result))
-                            	{
-                            		echo "</br><a href='pages.php?id=".$data['id_topik']."'>".$data['title']."</a></br>";
+		                       $stmt->bind_result($id_topik, $title);  // <-- one param for each field returned
+                            while ($stmt->fetch()) {
+                            		echo "</br><a href='pages.php?id=".$id_topik."'>".$title."</a></br>";
                             	}
                             ?>
                         <a href="iklan-baru.php"><button>Buat Iklan</button></a>
@@ -188,9 +185,10 @@ if(isset($_POST['nama']) && isset($_POST['email']) && isset($_POST['telpon'])) {
 			<div id="footer" class="grid_24">
                         
                       <ul>
-                         <li><a href="#" class="grid_4"><strong>Disclaimer</strong></a></li>
-                         <li><a href="#" class="grid_4"><strong>Petunjuk</strong></a></li>
-                         <li><a href="#" class="grid_4"><strong>ABOUT US</strong></a></li>
+                         
+                                            <li><a href="ketentuan.php" class="grid_4"><strong>Ketentuan</strong></a></li>
+                                            <li><a href="petunjuk.php" class="grid_4"><strong>Petunjuk</strong></a></li>
+                                            <li><a href="tentang-kami.php" class="grid_4"><strong>ABOUT US</strong></a></li>
                       </ul>
                 
             </div>
@@ -198,5 +196,9 @@ if(isset($_POST['nama']) && isset($_POST['email']) && isset($_POST['telpon'])) {
 
 	</div>
 
+<?php
+mysqli_close($mysqli);
+mysql_close($koneksi);
+?>
 </body>
 </html>

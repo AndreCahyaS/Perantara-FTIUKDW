@@ -133,60 +133,17 @@
 
                           $kategori = $_GET['kategori'];
                           $kategoria= $_GET['kategori'];
-                          $provinsi = $_GET['provinsi'];
-                          $provinsia = $_GET['provinsi'];
-
-                            if ($_GET['provinsi'] == "semua-provinsi" && $_GET['kategori'] == "semua-kategori") {
-                                
-                                $query = "SELECT `id_topik`, `title`, `gambar1`, `gambar2`, `isi` FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi NOT LIKE ? AND kategori NOT LIKE ? LIMIT $offset, $dataPerPage";
-                                $query2 = "SELECT `isi` FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi NOT LIKE ? AND kategori NOT LIKE ?";
-                               
-                                
-                            }
-                            else if ($_GET['provinsi'] != "semua-provinsi" && $_GET['kategori'] != "semua-kategori") {
-                                
-
-                                $query = "SELECT `id_topik`, `title`, `gambar1`, `gambar2`, `isi` FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi LIKE ? AND kategori LIKE ? LIMIT $offset, $dataPerPage";
-                                $query2 = "SELECT `isi` FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi LIKE ? AND kategori LIKE ?";
-                             
-                            }
-                            
-                            else if($_GET['kategori'] == "semua-kategori" && $_GET['provinsi'] != "semua-provinsi")
-                            {
-                               $query = "SELECT `id_topik`, `title`, `gambar1`, `gambar2`, `isi` FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi LIKE ? AND kategori NOT LIKE ? LIMIT $offset, $dataPerPage";
-                               $query2 = "SELECT `isi` FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi LIKE ? AND kategori NOT LIKE ?";
-                              
-
-                            }
-                            else if($_GET['kategori'] != "semua-kategori" && $_GET['provinsi'] == "semua-provinsi")
-                            {
-                               $query = "SELECT `id_topik`, `title`, `gambar1`, `gambar2`, `isi` FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi NOT LIKE ? AND kategori LIKE ? LIMIT $offset, $dataPerPage";
-                               $query2 = "SELECT `isi` FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi NOT LIKE ? AND kategori LIKE ?";
-                             
-                            }
+                         
 
                           
-
-                            
-
-                            if($_GET['pencarian'] == "")
-                            {
-                                
-                                $pencariana = "";
-                                
-                            }
-                            else
-                            {
-                                $pencariana = $_GET['pencarian'];
-                                $pencarian = "%"."$pencariana"."%";
-                            }
-
-                            
+                                $query = "SELECT * FROM topik WHERE kategori LIKE ? LIMIT $offset, $dataPerPage";
+                                $query2 = "SELECT * FROM topik WHERE kategori LIKE ?";
+                               
 
                             
                             $stmt2 = mysqli_prepare($mysqli, $query2) or die(mysqli_error($mysqli));
 
-                            mysqli_stmt_bind_param($stmt2, "sssss", $pencarian, $pencarian, $pencarian, $provinsi, $kategori) or die(mysqli_error($mysqli));
+                            mysqli_stmt_bind_param($stmt2, "s", $kategori) or die(mysqli_error($mysqli));
                             mysqli_stmt_execute($stmt2) or die(mysqli_error($mysqli));;
                             $total =  mysqli_stmt_store_result($stmt2);
                            
@@ -203,7 +160,7 @@
                                         if (($noPage == 1) && ($page != 2))  echo "...";
                                         if (($noPage != ($jumPage - 1)) && ($page == $jumPage))  echo "...";
                                         if ($page == $noPage) echo " <b>".$page."</b> ";
-                                        else echo " <a href='".$_SERVER['PHP_SELF']."?page=".$page."&pencarian=".$pencariana."&provinsi=".$provinsia."&kategori=".$kategoria."'>".$page."</a> ";
+                                        else echo " <a href='".$_SERVER['PHP_SELF']."?page=".$page."&kategori=".$kategoria."'>".$page."</a> ";
                                         $noPage = $page;
                                      }
                             }
@@ -213,7 +170,7 @@
                             <?php 
                             $stmt = mysqli_prepare($mysqli, $query) or die(mysqli_error($mysqli));
 
-                            mysqli_stmt_bind_param($stmt, "sssss", $pencarian, $pencarian, $pencarian, $provinsi, $kategori) or die(mysqli_error($mysqli));
+                            mysqli_stmt_bind_param($stmt, "s", $kategori) or die(mysqli_error($mysqli));
 
                             mysqli_stmt_execute($stmt) or die(mysqli_error($mysqli));;
                             $stmt->bind_result($id_topik, $title, $gambar1, $gambar2, $isi);  // <-- one param for each field returned
@@ -264,9 +221,9 @@ mysql_close($koneksi);
                  <div id="footer" class="grid_24">
                         
                                     <ul>
-                                            <li><a href="#" class="grid_4"><strong>Ketentuan</strong></a></li>
-                                            <li><a href="#" class="grid_4"><strong>Petunjuk</strong></a></li>
-                                            <li><a href="#" class="grid_4"><strong>ABOUT US</strong></a></li>
+                                            <li><a href="ketentuan.php" class="grid_4"><strong>Ketentuan</strong></a></li>
+                                            <li><a href="petunjuk.php" class="grid_4"><strong>Petunjuk</strong></a></li>
+                                            <li><a href="tentang-kami.php" class="grid_4"><strong>ABOUT US</strong></a></li>
                                     </ul>
                     
                     </div>

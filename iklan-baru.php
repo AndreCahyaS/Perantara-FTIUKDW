@@ -30,7 +30,7 @@
             $namagambar2 = sha1($username.$date2).$_FILES["gambar2"]["name"];
             $gambar1type = $_FILES['gambar1']["type"];
             $gambar2type = $_FILES['gambar2']["type"];
-            if($gambar1type == "image/jpeg" || $gambar1type == "image/pjpeg" || $gambar1type == "image/x-png" || $gambar1type == "image/gif" || $gambar2type == "image/jpeg" || $gambar2type == "image/pjpeg" || $gambar2type == "image/x-png" || $gambar2type == "image/gif") { 
+            if($gambar1type == "image/jpeg" || $gambar1type == "image/pjpeg" || $gambar1type == "image/png" || $gambar1type == "image/gif" || $gambar2type == "image/jpeg" || $gambar2type == "image/pjpeg" || $gambar2type == "image/png" || $gambar2type == "image/gif") { 
  
             move_uploaded_file($_FILES["gambar1"]["tmp_name"], $dir.$namagambar1);
             move_uploaded_file($_FILES["gambar2"]["tmp_name"], $dir.$namagambar2);
@@ -66,13 +66,17 @@ CURRENT_TIMESTAMP , '".$kategori."', '".$username."', '".$nego."', '".$kondisi."
 );";
         $stmt = mysqli_prepare($mysqli, $query);
 
-        mysqli_stmt_bind_param($stmt, "sssssss", $judul, $deskripsi, $tag1, $tag2, $tag3, $tag4, $harga) or die(mysqli_error);
+        mysqli_stmt_bind_param($stmt, "sssssss", $judul, $deskripsi, $tag1, $tag2, $tag3, $tag4, $harga) or die(mysqli_error());
         $res = mysqli_stmt_execute($stmt);
     
-
+        
         if ($res)
         {
-            header("Location:iklan-baru.php?add=1");
+            $query = "SELECT `id_topik` FROM topik WHERE kategori = '$kategori' AND isi = '$deskripsi' AND gambar1 = '$namagambar1'";
+                $result = mysql_query($query);
+            $data=mysql_fetch_assoc($result);
+            $redi = "pages.php?id=".$data['id_topik'];
+            header("Location:$redi");
         }
     }
     else {
@@ -80,7 +84,7 @@ CURRENT_TIMESTAMP , '".$kategori."', '".$username."', '".$nego."', '".$kondisi."
     }
             
 
-    mysql_close($koneksi);
+   
 ?>
 
 <!DOCTYPE html>
@@ -101,7 +105,7 @@ CURRENT_TIMESTAMP , '".$kategori."', '".$username."', '".$nego."', '".$kondisi."
                 <div id="header" class="grid_24">
 
                     <div id="banner" class="grid_18">
-                        <a href="index.php"> <img src="banner.jpeg" height="200" width="600"></a>
+                        <a href="index.php"> <img src="banner.jpeg" height="100" width="600"></a>
                     </div>
 
 
@@ -112,10 +116,10 @@ CURRENT_TIMESTAMP , '".$kategori."', '".$username."', '".$nego."', '".$kondisi."
                                      {
                                         $username = $_SESSION['user'];
                                          ?>
-                                        <h3>Hello ,<a href="halamansaya.php"><?php echo $username; ?></a></h3>
+                                        <h3>Hello,<a href="halamansaya.php"><?php echo $username; ?></a></h3>
 
-                                
                                  <a href="logout.php"> <button>Logout</button></a>
+                                  <a href="iklan-baru.php"><input type="submit" value="Buat Iklan Baru"></a>
                                 <?php
                                         }
                                         else {
@@ -245,13 +249,17 @@ CURRENT_TIMESTAMP , '".$kategori."', '".$username."', '".$nego."', '".$kondisi."
                      
 
                 </div>
-
+<?php
+mysqli_close($mysqli);
+mysql_close($koneksi);
+?>
                  <div id="footer" class="grid_24">
                         
                                     <ul>
-                                            <li><a href="#" class="grid_4"><strong>Disclaimer</strong></a></li>
-                                            <li><a href="#" class="grid_4"><strong>Petunjuk</strong></a></li>
-                                            <li><a href="#" class="grid_4"><strong>ABOUT US</strong></a></li>
+                                            
+                                            <li><a href="ketentuan.php" class="grid_4"><strong>Ketentuan</strong></a></li>
+                                            <li><a href="petunjuk.php" class="grid_4"><strong>Petunjuk</strong></a></li>
+                                            <li><a href="tentang-kami.php" class="grid_4"><strong>ABOUT US</strong></a></li>
                                     </ul>
                     
                     </div>

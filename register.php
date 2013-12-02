@@ -1,6 +1,6 @@
 <?php
     include("koneksi.php");
-    require ("PasswordHash.php");
+
     //masukkan ke data base form sign up
     //cek dulu apa ada data yang dikirim
 
@@ -12,8 +12,7 @@
 
        
 
-        $hasher = new PasswordHash(8, TRUE);
-        $hash = $hasher->HashPassword($password);
+        
         $pass = sha1($password);
 
        $query = "INSERT INTO `u957988429_a`.`user` (`user_id` ,`username` ,`nama` ,`email` ,`password` ,`joindate`)VALUES (NULL,  ?,  ?,  ?,  '".$pass."', CURRENT_TIMESTAMP)";
@@ -33,7 +32,7 @@
     {
         echo "Isi semua";
     }
-    mysql_close($koneksi);
+   
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +54,7 @@
                     <div id="header" class="grid_24">
 
                           <div id="banner" class="grid_18">
-                                   <a href="index.php"> <img src="banner.jpeg" height="200" width="600"></a>
+                                  <a href="index.php"> <img src="banner.jpeg" height="100" width="600"></a>
                       </div>
 
                           <div id="masuk" class="grid_5">
@@ -67,13 +66,14 @@
                                      {
                                         $username = $_SESSION['user'];
                                 ?>
-                                    <h3>Hello ,<a href="halamansaya.php"><?php echo $username; ?></a></h3>
+                                    <h3>Hello,<a href="halamansaya.php"><?php echo $username; ?></a></h3>
 
-                                    <a href="logout.php"> <button>Logout</button></a>
+                                 <a href="logout.php"> <button>Logout</button></a>
+                                  <a href="iklan-baru.php"><input type="submit" value="Buat Iklan Baru"></a>
                           </div>
                       </div>
                                     <div id="content" class="grid_24">
-                                       Maaf, ketika anda sedang log<br>in, maka anda tidak bisa men<br>daftar. Mohon logout terlebi<br>h dahulu.<br>
+                                       Maaf, ketika anda sedang login, maka anda tidak bisa mendaftar. Mohon logout terlebih dahulu.<br>
                                     </div>
                                 <?php
                                         }
@@ -141,12 +141,17 @@
                     <div id="footer" class="grid_24">
                         
                                     <ul>
-                                            <li><a href="#" class="grid_4"><strong>Disclaimer</strong></a></li>
-                                            <li><a href="#" class="grid_4"><strong>Petunjuk</strong></a></li>
-                                            <li><a href="#" class="grid_4"><strong>ABOUT US</strong></a></li>
+                                            <li><a href="ketentuan.php" class="grid_4"><strong>Ketentuan</strong></a></li>
+                                            <li><a href="petunjuk.php" class="grid_4"><strong>Petunjuk</strong></a></li>
+                                            <li><a href="tentang-kami.php" class="grid_4"><strong>ABOUT US</strong></a></li>
                                     </ul>
                     
                     </div>
+
+<?php
+mysqli_close($mysqli);
+mysql_close($koneksi);
+?>
            </div>
         </body>
 

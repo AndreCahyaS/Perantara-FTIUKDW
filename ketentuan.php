@@ -16,7 +16,7 @@
                 	<div id="header" class="grid_24">
                       <a href="index.php">
                 		  <div id="banner" class="grid_18">
-                        <a href="index.php"> <img src="banner.jpeg" height="100" width="600"></a>
+                             <a href="index.php"> <img src="banner.jpeg" height="100" width="600"></a>
                       </div>
                       </a>
 
@@ -57,32 +57,63 @@
 
                   
                   <div id="content" class="grid_24">
-                  <div id="petunjuk" class="grid_18">
-                    <p></pre>About Us<br>
+                  <div id="isi" class="grid_18">
+                    <p></pre>Ketentuan:
+
+Perantara menyediakan kebebasan bertransaksi. Dengan menggunakan Perantara, berarti anda setuju dengan persyaratan berikut: <br>
 <br>
-Sekilas Tentang Perantara<br>
+1. Dalam segala hal kami tidak bertanggung jawab atas kehilangan atau kerusakan termasuk, namun tidak terbatas pada, kehilangan atau kerugian tidak langsung atau kerugian apapun juga yang menyebabkan hilangnya data atau laba yang timbul dari atau dalam hubungannya dengan penggunaan situs web ini.<br>
+2. Kami tidak bertanggung jawab atas pemfitnahan atau transaksi illegal yang terjadi melalui situs ini.<br>
+3. Melalui situs ini, anda dapat terhubung ke situs web yang lain yang tidak berada di bawah kontrol Perantara. Kami tidak bisa menjamin sifat, isi dan ketersediaan situs-situs tersebut.<br>
+4. Setiap upaya dilakukan untuk menjaga agar situs web tetap berjalan mulus. Namun kami tidak bertanggung jawab dan tidak berkewajiban terhadap situs web yang tidak tersedia untuk sementara waktu sehubungan dengan masalah teknis yang berada di luar kendali kami.<br>
+<br><br>Aturan<br>
+<br>Dilarang mengiklankan barang/jasa sebagai berikut:<br>
 <br>
-Perantara adalah situs penyedia jasa jual beli online di Indonesia.<br>
-<br>
-Perantara adalah tempat yang sangat tepat bagi siapa saja untuk mencari barang baru maupun bekas berkualitas seperti produk handphone murah, komputer, fashion, mobil, motor, rumah dan properti, alat olahraga, peralatan rumah tangga, dan juga hewan peliharaan. Untuk para penjual, pasang iklan gratis adalah salah satu layanan yang disediakan oleh Perantara. Iklan anda akan dilihat oleh ratusan ribu orang setiap harinya. Bertransaksi di Perantara, baik jual maupun belu tidak dikenakan biaya, semuanya gratis. Ayo bergabunglah sekarang juga bersama jutaan member lain yang sudah terdaftar.<br><br>
+    - Senjata (termasuk senjata api, senapan angin dan benda yang mirip/sejenisnya)<br>
+    - Obat-obatan terlarang<br>
+    - Blackmarket item<br>
+    - Barang kw, super premium, grade AAA/+++, suprem, dll<br>
+    - Barang bajakan, copy dari original<br>
+    - Barang replika, branded wanna be, look alike<br>
+    - Konten vulgar, pornografi, erotis, & sex<br>
+    - Produk MLM, money games, PPC, cepat kaya dan sejenisnya<br>
+    - Asuransi, kartu kredit, KTA dan sejenisnya<br>
+    - Database, jual data nasabah<br>
+    - Alat bantu sex, vibrator, obat sex, obat kuat, enlargement, perangsang, pemerah puting, pemutih selangkangan<br>
+    - Alkohol dan minuman keras lainnya<br>
+    - Organ tubuh manusia dan manusia (human trafficking)<br>
+    - Barang hasil kejahatan<br>
+    - Tanaman & binatang yang dilindungi (termasuk bagian tubuh, seperti taring, cakar, air keras, kulit dll)<br>
+    - Jasa hacking (perentas)<br>
+    - Jasa pemalsuan dokumen, jual ijazah, jual sertifikat<br>
+    - Jasa pijat (++)<br>
+    - Pekerja seks komersial<br>
+    - Jasa jailbreak<br>
+    -  Minyak pelet, jasa santet, teluh<br>
+    - Bahan peledak berbahaya<br>
+    - Produk atau jasa yang melanggar undang-undang dan peraturan pemerintah<br>
+
+Keterangan:<br>
+Perantara mempunyai hak untuk memutuskan iklan yang ditayangkan dan mencabut iklan yang tidak sesuai dengan peraturan pemasangan iklan, maupun dengan mempertimbangkan berbagai alasan tertentu. Peraturan ini akan selalu diperbaharui dan dapat berubah sewaktu-waktu.
+
 </pre></p>
                 
                                
                     </div>
                 
                      <div id="iklan" class="grid_5">
-                       <?php 
+                         <?php 
                             
 
                             $numbers = array(1,1,1,1);
                         
                                                                       
-                                                                     
                                         $numbers[0] = rand(1, $total);
                                         $numbers[1] = rand(1, $total);
                                         $numbers[2] = rand(1, $total);
                                         $numbers[3] = rand(1, $total);
-                                 
+                                  
+                        
                             
 
                             
