@@ -24,6 +24,8 @@
                                  <?php
                                     include("koneksi.php");
                                     session_start();
+                                    $result = mysql_query("SELECT * from topik") or die (mysql_error());
+                                    $total = mysql_num_rows($result); 
                                     if(isset($_SESSION['user']))
                                      {
                                         $username = $_SESSION['user'];
@@ -69,27 +71,25 @@ Perantara adalah tempat yang sangat tepat bagi siapa saja untuk mencari barang b
                     </div>
                 
                      <div id="iklan" class="grid_5">
-                                  <?php 
-                            $result = mysql_query("Select * from topik");
-                            $total = mysql_num_rows($result);       
+                       <?php 
+                            
+
                             $numbers = array(1,1,1,1);
                         
-                                    while ( $numbers[0] == $numbers[1] || $numbers[0] == $numbers[2] || $numbers[0] == $numbers[3] || $numbers[1] == $numbers[2] || $numbers[1] == $numbers[3] || $numbers[2] == $numbers[3]  ) 
-                                    {                                    
+                                                                      
+                                                                     
                                         $numbers[0] = rand(1, $total);
                                         $numbers[1] = rand(1, $total);
                                         $numbers[2] = rand(1, $total);
                                         $numbers[3] = rand(1, $total);
-                                    }
-            
-                        
-                              
+                                 
+                            
 
                             
                                #for($i=0;$i<4;$i++)
                                #{
                                     $query = "SELECT * FROM topik WHERE id_topik='".$numbers[0]."' OR id_topik='".$numbers[1]."' OR id_topik='".$numbers[2]."' OR id_topik='".$numbers[3]."'" or die('disni');
-                                    $hasilquery = mysql_query($query);
+                                    $hasilquery = mysql_query($query) or die (mysql_error());
 
                                     #echo $hasilquery['id_topik']."wewew";
                                   
@@ -106,7 +106,7 @@ Perantara adalah tempat yang sangat tepat bagi siapa saja untuk mencari barang b
                                    <div class="iklandepan grid_5">
   
                                     <strong><?php echo $data['title']; ?></strong><br/>
-                                    <img src="image/<?php echo $data['gambar1'];?>" width="150" heigth="150">
+                                    <img src="image/<?php echo $data['gambar1'];?>" width="150" height="150">
                                    <div class="isiiklan"> 
                                     <?php echo $data['isi'];?></div>
 

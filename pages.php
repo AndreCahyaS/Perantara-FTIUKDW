@@ -99,7 +99,7 @@ VALUES (NULL , ?, ?, NOW( ), ?)";
                             ?>
                              <div id="kiri" class="grid_17">
                                 <div class="grid_7 gambar">
-                               <img src="image/<?php echo $gambar1; $user = $username; ?>" width="150" heigth="200">  
+                               <img src="image/<?php echo $gambar1; $user = $username; ?>" width="150" height="200">  
                                 </div>
                                 <div  class="grid_7 gambar">
                                   <img src="image/<?php echo $gambar2; ?>" width="150" heigth="200">  
@@ -135,11 +135,12 @@ VALUES (NULL , ?, ?, NOW( ), ?)";
                             }
 
                                        if(isset($_SESSION['user'])) {
-                            ?>
+                            ?><div id="komen" class="grid_14">
                               <form id="komen" method="post" action="pages.php?id=<?php echo $id; ?>">
                               <label>Komentar : </label><input type="text" name="isikomen"></input><br>
                               <input type="submit" value="submit komentar">
                                                           </form>
+                                                        </div>
                             <?php 
                             }
                       

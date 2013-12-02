@@ -128,7 +128,7 @@ if(isset($_POST['nama']) && isset($_POST['email']) && isset($_POST['telpon'])) {
 						<td><label>email</label></td><td><input type="text" value="<?php echo $email; ?>" name="email"/><br></td>
 					</tr>
 					<tr>
-						<td><label>Nomor Telepon</label></td><td><input type="text" value="<?php $telepon; ?>" name="telpon"/><br></td>
+						<td><label>Nomor Telepon</label></td><td><input type="text" value="<?php echo $telepon; ?>" name="telpon"/><br></td>
 					</tr>
 					<!-- <label>Rating</label><input type="text" value="<?php //$data[rating]; ?>"/> -->
 						<tr><td><input type="submit" value="Ubah"/></td></tr>

@@ -128,37 +128,25 @@
                         else $noPage = 1;
                         $offset = ($noPage - 1) * $dataPerPage;
                 
-                         if(isset($_GET['kategori']))
+                         if(isset($_GET['provinsi']) || isset($_GET['pencarian']))
                          {
 
                           $kategori = $_GET['kategori'];
+                          $kategoria= $_GET['kategori'];
+                         
+
                           
-
-                            
-
                                 $query = "SELECT * FROM topik WHERE kategori LIKE ? LIMIT $offset, $dataPerPage";
                                 $query2 = "SELECT * FROM topik WHERE kategori LIKE ?";
-                             
-                            
-
-                            
-
-                           
-
-                            $stmt = mysqli_prepare($mysqli, $query) or die(mysqli_error($mysqli));
-
-                            mysqli_stmt_bind_param($stmt, "s", $kategori) or die(mysqli_error($mysqli));
-
-                            mysqli_stmt_execute($stmt) or die(mysqli_error($mysqli));;
-                            $result = mysqli_stmt_get_result($stmt);
+                               
 
                             
                             $stmt2 = mysqli_prepare($mysqli, $query2) or die(mysqli_error($mysqli));
 
                             mysqli_stmt_bind_param($stmt2, "s", $kategori) or die(mysqli_error($mysqli));
                             mysqli_stmt_execute($stmt2) or die(mysqli_error($mysqli));;
-                            $result2 = mysqli_stmt_get_result($stmt2);
-                            $total = mysqli_num_rows($result2);
+                            $total =  mysqli_stmt_store_result($stmt2);
+                           
                            
                          ?>
                          <div id="jumlah">Ditemukan <?php echo $total ?> hasil dari pencarian</div>
@@ -172,7 +160,7 @@
                                         if (($noPage == 1) && ($page != 2))  echo "...";
                                         if (($noPage != ($jumPage - 1)) && ($page == $jumPage))  echo "...";
                                         if ($page == $noPage) echo " <b>".$page."</b> ";
-                                        else echo " <a href='".$_SERVER['PHP_SELF']."?page=".$page."&pencarian=".$pencariana."&provinsi=".$provinsia."&kategori=".$kategoria."'>".$page."</a> ";
+                                        else echo " <a href='".$_SERVER['PHP_SELF']."?page=".$page."&kategori=".$kategoria."'>".$page."</a> ";
                                         $noPage = $page;
                                      }
                             }
@@ -180,8 +168,14 @@
                          ?>
                          <div class="clear"></div>
                             <?php 
-                                while($data = mysqli_fetch_array($result))
-                                {
+                            $stmt = mysqli_prepare($mysqli, $query) or die(mysqli_error($mysqli));
+
+                            mysqli_stmt_bind_param($stmt, "s", $kategori) or die(mysqli_error($mysqli));
+
+                            mysqli_stmt_execute($stmt) or die(mysqli_error($mysqli));;
+                            $stmt->bind_result($id_topik, $title, $gambar1, $gambar2, $isi);  // <-- one param for each field returned
+                            while ($stmt->fetch()) {
+                                $id= $id_topik;
                                     /*if($_SESSION['halaman-pencarian']-1 == ($_SESSION['total-pencarian']-1)/5)
                                     {*/
                                     //echo '<a href="rincian.php?id='.$data['id_topik'].'>';
@@ -190,13 +184,13 @@
 
                                 
 
-                                <a href="pages.php?id=<?php echo $data['id_topik'] ?>">
-                                    <img src="<?php if(isset($data['gambar1'])){ echo "image/".$data['gambar1'];} else if(isset($data['gambar2'])){echo image/$data['gambar2'];} else echo 'image/no-image.jpg' ?>" title="<?php echo $data['title']; ?>" width="150" heigth="300">
+                                <a href="pages.php?id=<?php echo $id ?>">
+                                    <img src="<?php if(isset($gambar1)){ echo "image/".$gambar1;} else if(isset($gambar2)){echo image/$gambar2;} else echo 'image/no-image.jpg' ?>" title="<?php echo $title; ?>" width="150" height="300">
 
 
                                     <p>
                                         <?php
-                                            echo $data['isi'];
+                                            echo $isi;
                                         ?>
                                         <!-- Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -227,9 +221,9 @@ mysql_close($koneksi);
                  <div id="footer" class="grid_24">
                         
                                     <ul>
-                                            <li><a href="#" class="grid_4"><strong>Disclaimer</strong></a></li>
-                                            <li><a href="#" class="grid_4"><strong>Petunjuk</strong></a></li>
-                                            <li><a href="#" class="grid_4"><strong>ABOUT US</strong></a></li>
+                                            <li><a href="ketentuan.php" class="grid_4"><strong>Ketentuan</strong></a></li>
+                                            <li><a href="petunjuk.php" class="grid_4"><strong>Petunjuk</strong></a></li>
+                                            <li><a href="tentang-kami.php" class="grid_4"><strong>ABOUT US</strong></a></li>
                                     </ul>
                     
                     </div>

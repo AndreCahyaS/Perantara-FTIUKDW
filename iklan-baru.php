@@ -30,7 +30,7 @@
             $namagambar2 = sha1($username.$date2).$_FILES["gambar2"]["name"];
             $gambar1type = $_FILES['gambar1']["type"];
             $gambar2type = $_FILES['gambar2']["type"];
-            if($gambar1type == "image/jpeg" || $gambar1type == "image/pjpeg" || $gambar1type == "image/x-png" || $gambar1type == "image/gif" || $gambar2type == "image/jpeg" || $gambar2type == "image/pjpeg" || $gambar2type == "image/x-png" || $gambar2type == "image/gif") { 
+            if($gambar1type == "image/jpeg" || $gambar1type == "image/pjpeg" || $gambar1type == "image/png" || $gambar1type == "image/gif" || $gambar2type == "image/jpeg" || $gambar2type == "image/pjpeg" || $gambar2type == "image/png" || $gambar2type == "image/gif") { 
  
             move_uploaded_file($_FILES["gambar1"]["tmp_name"], $dir.$namagambar1);
             move_uploaded_file($_FILES["gambar2"]["tmp_name"], $dir.$namagambar2);
@@ -66,13 +66,17 @@ CURRENT_TIMESTAMP , '".$kategori."', '".$username."', '".$nego."', '".$kondisi."
 );";
         $stmt = mysqli_prepare($mysqli, $query);
 
-        mysqli_stmt_bind_param($stmt, "sssssss", $judul, $deskripsi, $tag1, $tag2, $tag3, $tag4, $harga) or die(mysqli_error);
+        mysqli_stmt_bind_param($stmt, "sssssss", $judul, $deskripsi, $tag1, $tag2, $tag3, $tag4, $harga) or die(mysqli_error());
         $res = mysqli_stmt_execute($stmt);
     
-
+        
         if ($res)
         {
-            header("Location:iklan-baru.php?add=1");
+            $query = "SELECT `id_topik` FROM topik WHERE kategori = '$kategori' AND isi = '$deskripsi' AND gambar1 = '$namagambar1'";
+                $result = mysql_query($query);
+            $data=mysql_fetch_assoc($result);
+            $redi = "pages.php?id=".$data['id_topik'];
+            header("Location:$redi");
         }
     }
     else {

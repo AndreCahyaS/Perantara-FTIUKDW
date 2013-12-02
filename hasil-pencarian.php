@@ -228,7 +228,7 @@
                                 
 
                                 <a href="pages.php?id=<?php echo $id ?>">
-                                    <img src="<?php if(isset($gambar1)){ echo "image/".$gambar1;} else if(isset($gambar2)){echo image/$gambar2;} else echo 'image/no-image.jpg' ?>" title="<?php echo $title; ?>" width="150" heigth="300">
+                                    <img src="<?php if(isset($gambar1)){ echo "image/".$gambar1;} else if(isset($gambar2)){echo image/$gambar2;} else echo 'image/no-image.jpg' ?>" title="<?php echo $title; ?>" width="150" height="300">
 
 
                                     <p>
@@ -264,7 +264,7 @@ mysql_close($koneksi);
                  <div id="footer" class="grid_24">
                         
                                     <ul>
-                                            <li><a href="#" class="grid_4"><strong>Disclaimer</strong></a></li>
+                                            <li><a href="#" class="grid_4"><strong>Ketentuan</strong></a></li>
                                             <li><a href="#" class="grid_4"><strong>Petunjuk</strong></a></li>
                                             <li><a href="#" class="grid_4"><strong>ABOUT US</strong></a></li>
                                     </ul>

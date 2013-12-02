@@ -188,7 +188,7 @@
                                    <div class="iklandepan grid_5">
   
                                     <strong><?php echo $data['title']; ?></strong><br/>
-                                    <img src="image/<?php echo $data['gambar1'];?>" width="150" heigth="150">
+                                    <img src="image/<?php echo $data['gambar1'];?>" width="150" height="150">
                                    <div class="isiiklan"> 
                                     <?php echo $data['isi'];?></div>
 
