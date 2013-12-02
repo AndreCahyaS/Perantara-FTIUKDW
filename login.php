@@ -1,13 +1,12 @@
 <?php
 	//konek database dulu
 	include("koneksi.php");
-	require ("PasswordHash.php");
+
 
 	$username = $_POST['username'];
 	$password = $_POST['password'];
 	$passe = sha1($password);
-	$hasher = new PasswordHash(8, TRUE);
-	$hash = $hasher->HashPassword($password);
+	
 
 	
 	//query ke db ada tidaknya user

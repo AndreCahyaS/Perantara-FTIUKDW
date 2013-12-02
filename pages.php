@@ -1,6 +1,8 @@
 <?php
 include("koneksi.php");
 session_start();
+$user;
+$harga2;
 
 if(isset($_POST['isikomen']) && isset($_GET['id']) && isset($_SESSION['user'])) {
   $isikomen = $_POST['isikomen'];
@@ -41,7 +43,7 @@ VALUES (NULL , ?, ?, NOW( ), ?)";
                   <div id="header" class="grid_24">
 
                       <div id="banner" class="grid_18">
-                                  <a href="index.php"> <img src="banner.jpeg" height="200" width="600"></a>
+                                  <a href="index.php"> <img src="banner.jpeg" height="100" width="600"></a>
                       </div>
 
                           <div id="masuk" class="grid_5">
@@ -51,9 +53,10 @@ VALUES (NULL , ?, ?, NOW( ), ?)";
                                         $username = $_SESSION['user'];
                                   
                                  ?>
-                                 <h3>Hello ,<a href="halamansaya.php"><?php echo $username; ?></a></h3>
+                                 <h3>Hello,<a href="halamansaya.php"><?php echo $username; ?></a></h3>
 
                                  <a href="logout.php"> <button>Logout</button></a>
+                                  <a href="iklan-baru.php"><input type="submit" value="Buat Iklan Baru"></a>
                                 <?php
                                         }
                                         else {
@@ -80,50 +83,52 @@ VALUES (NULL , ?, ?, NOW( ), ?)";
                     <?php 
                         if(isset($_GET['id'])) {
                               $id = $_GET['id'];
-                            $query = "SELECT * FROM topik WHERE id_topik=?";
+                            $query = "SELECT `gambar1`, `gambar2`, `isi`, `harga`, `username` FROM topik WHERE id_topik=?";
                            
 
                              $stmt = mysqli_prepare($mysqli, $query);
 
-                            mysqli_stmt_bind_param($stmt, 'i', $id) or die(mysqli_error);
+                            mysqli_stmt_bind_param($stmt, "s", $id) or die(mysqli_error($mysqli));
                             mysqli_stmt_execute($stmt);
-                            $result = mysqli_stmt_get_result($stmt);
-
-                                while($data=mysqli_fetch_array($result))
-                                { 
+                            $stmt->bind_result($gambar1, $gambar2, $isi, $harga, $username);  // <-- one param for each field returned
+                            
+                           
+                            while ($stmt->fetch()) {
+                                
 
                             ?>
                              <div id="kiri" class="grid_17">
                                 <div class="grid_7 gambar">
-                               <img src="image/<?php echo $data['gambar1'] ?>" width=260 heigth=300>  
+                               <img src="image/<?php echo $gambar1; $user = $username; ?>" width="150" heigth="200">  
                                 </div>
                                 <div  class="grid_7 gambar">
-                                  <img src="image/<?php echo $data['gambar2'] ?>" width=260 heigth=300>  
+                                  <img src="image/<?php echo $gambar2; ?>" width="150" heigth="200">  
                                 </div>
-
+                                <?php $harga2 = $harga; ?>
                                  <div  class="grid_16 deskripsi">
                                   <h1>Deskripsi Barang :</h1>
-                                  <p><?php echo $data['isi']; ?> </p>
+                                  <p><?php echo $isi; ?> </p>
                                 </div>
                                 <?php
-                                $query2 = "SELECT * FROM komen WHERE id_topik=?";
-                           
+                              }
+                                 $query2 = "SELECT `isi`, `username`, `tanggal` FROM komen WHERE id_topik= ?";
+                              
 
-                             $stmt2 = mysqli_prepare($mysqli, $query2);
-                            mysqli_stmt_bind_param($stmt2, 'i', $id) or die(mysqli_error);
+                             $stmt2 = mysqli_prepare($mysqli, $query2) or die(mysqli_error($mysqli));
+
+                            mysqli_stmt_bind_param($stmt2, 'i', $id) or die(mysqli_error($mysqli));
                             mysqli_stmt_execute($stmt2);
-                            $result2 = mysqli_stmt_get_result($stmt2);
-
-                                while($data2=mysqli_fetch_array($result2))
-                                { 
+                            $stmt2->bind_result($isi, $username, $tanggal);  // <-- one param for each field returned
+                            while ($stmt2->fetch()) {
+                                
                             ?>
 
                             <div class="komentar grid_17">
-                                  <div class="komentar_user grid_5"><?php echo $data2['username'];?>
+                                  <div class="komentar_user grid_5"><?php echo $username;?>
                                   </div> 
-                                  <div class="tanggal grid_5"><?php echo "".$data2['tanggal'].""; ?> </div>
+                                  <div class="tanggal grid_5"><?php echo $tanggal; ?> </div>
                                   <div class="isi grid_16">
-                                  <p><?php echo $data2['isi']; ?></p>
+                                  <p><?php echo $isi; ?></p>
                                 </div>
                             </div>
                             <?php
@@ -145,7 +150,7 @@ VALUES (NULL , ?, ?, NOW( ), ?)";
                              <div id="kanan" class="grid_6">
                                 <div id="kontak" class="grid_5">
                                   <?php
-                                  $username = $data['username'];
+                                  $username = $user;
                                    $queryuser = "SELECT * FROM user WHERE username='".$username."'";
                                    $hasiluser = mysql_query($queryuser);
 
@@ -156,7 +161,7 @@ VALUES (NULL , ?, ?, NOW( ), ?)";
                                   <table>
                                     <tr>
                                       <td>Username:</td>
-                                      <td><?php echo $data['username']; ?></td>
+                                      <td><?php echo $data2['username']; ?></td>
                                     </tr>
                                      <tr>
                                       <td>Telepon:</td>
@@ -165,17 +170,17 @@ VALUES (NULL , ?, ?, NOW( ), ?)";
                                     <td>Email:</td>
                                       <td><?php echo $data2['email']; ?></td>
                                     </tr>
-                                    
-                                <?php
-                           }
-                            ?>        
-                                      <tr>
-                                      <td>Harga:</td>
-                                      <td><?php echo $data['harga']; ?></td>
+                                     </tr>
+                                    <td>Harga :</td>
+                                      <td><?php echo $harga2; ?></td>
                                     </tr>
+                                <?php
+                           
+                            ?>        
+                                    
                                   </table>
                                 
-                             </div>
+                             
                              </div>
                              <?php
                       
@@ -188,7 +193,7 @@ VALUES (NULL , ?, ?, NOW( ), ?)";
 
                              $stmt = mysqli_prepare($mysqli, $query);
 
-                            mysqli_stmt_bind_param($stmt, 'i', $id) or die(mysqli_error);
+                            mysqli_stmt_bind_param($stmt, 'i', $id) or die(mysqli_error($mysqli));
                             mysqli_stmt_execute($stmt);
                             
                             mysqli_stmt_store_result($stmt);
@@ -199,17 +204,22 @@ VALUES (NULL , ?, ?, NOW( ), ?)";
                              ?>
                                         
                     </div>
-
+</div>
                     <div id="footer" class="grid_24">
                         
                                     <ul>
-                                            <li><a href="#" class="grid_4"><strong>Disclaimer</strong></a></li>
-                                            <li><a href="#" class="grid_4"><strong>Petunjuk</strong></a></li>
-                                            <li><a href="#" class="grid_4"><strong>ABOUT US</strong></a></li>
+                                            <li><a href="ketentuan.php" class="grid_4"><strong>Ketentuan</strong></a></li>
+                                            <li><a href="petunjuk.php" class="grid_4"><strong>Petunjuk</strong></a></li>
+                                            <li><a href="tentang-kami.php" class="grid_4"><strong>ABOUT US</strong></a></li>
                                     </ul>
                     
                     </div>
            </div>
+
+<?php
+mysqli_close($mysqli);
+mysql_close($koneksi);
+?>
         </body>
 
 </html>

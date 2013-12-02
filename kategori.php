@@ -128,68 +128,37 @@
                         else $noPage = 1;
                         $offset = ($noPage - 1) * $dataPerPage;
                 
-                         if(isset($_GET['provinsi']) || isset($_GET['pencarian']))
+                         if(isset($_GET['kategori']))
                          {
 
                           $kategori = $_GET['kategori'];
-                          $kategoria= $_GET['kategori'];
-                          $provinsi = $_GET['provinsi'];
-                          $provinsia = $_GET['provinsi'];
-
-                            if ($_GET['provinsi'] == "semua-provinsi" && $_GET['kategori'] == "semua-kategori") {
-                                
-                                $query = "SELECT `id_topik`, `title`, `gambar1`, `gambar2`, `isi` FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi NOT LIKE ? AND kategori NOT LIKE ? LIMIT $offset, $dataPerPage";
-                                $query2 = "SELECT `isi` FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi NOT LIKE ? AND kategori NOT LIKE ?";
-                               
-                                
-                            }
-                            else if ($_GET['provinsi'] != "semua-provinsi" && $_GET['kategori'] != "semua-kategori") {
-                                
-
-                                $query = "SELECT `id_topik`, `title`, `gambar1`, `gambar2`, `isi` FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi LIKE ? AND kategori LIKE ? LIMIT $offset, $dataPerPage";
-                                $query2 = "SELECT `isi` FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi LIKE ? AND kategori LIKE ?";
-                             
-                            }
-                            
-                            else if($_GET['kategori'] == "semua-kategori" && $_GET['provinsi'] != "semua-provinsi")
-                            {
-                               $query = "SELECT `id_topik`, `title`, `gambar1`, `gambar2`, `isi` FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi LIKE ? AND kategori NOT LIKE ? LIMIT $offset, $dataPerPage";
-                               $query2 = "SELECT `isi` FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi LIKE ? AND kategori NOT LIKE ?";
-                              
-
-                            }
-                            else if($_GET['kategori'] != "semua-kategori" && $_GET['provinsi'] == "semua-provinsi")
-                            {
-                               $query = "SELECT `id_topik`, `title`, `gambar1`, `gambar2`, `isi` FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi NOT LIKE ? AND kategori LIKE ? LIMIT $offset, $dataPerPage";
-                               $query2 = "SELECT `isi` FROM topik WHERE (isi LIKE CONCAT('%', ?, '%') OR title LIKE CONCAT('%', ?, '%') OR tag1 LIKE CONCAT('%', ?, '%')) AND propinsi NOT LIKE ? AND kategori LIKE ?";
-                             
-                            }
-
                           
 
                             
 
-                            if($_GET['pencarian'] == "")
-                            {
-                                
-                                $pencariana = "";
-                                
-                            }
-                            else
-                            {
-                                $pencariana = $_GET['pencarian'];
-                                $pencarian = "%"."$pencariana"."%";
-                            }
+                                $query = "SELECT * FROM topik WHERE kategori LIKE ? LIMIT $offset, $dataPerPage";
+                                $query2 = "SELECT * FROM topik WHERE kategori LIKE ?";
+                             
+                            
 
                             
+
+                           
+
+                            $stmt = mysqli_prepare($mysqli, $query) or die(mysqli_error($mysqli));
+
+                            mysqli_stmt_bind_param($stmt, "s", $kategori) or die(mysqli_error($mysqli));
+
+                            mysqli_stmt_execute($stmt) or die(mysqli_error($mysqli));;
+                            $result = mysqli_stmt_get_result($stmt);
 
                             
                             $stmt2 = mysqli_prepare($mysqli, $query2) or die(mysqli_error($mysqli));
 
-                            mysqli_stmt_bind_param($stmt2, "sssss", $pencarian, $pencarian, $pencarian, $provinsi, $kategori) or die(mysqli_error($mysqli));
+                            mysqli_stmt_bind_param($stmt2, "s", $kategori) or die(mysqli_error($mysqli));
                             mysqli_stmt_execute($stmt2) or die(mysqli_error($mysqli));;
-                            $total =  mysqli_stmt_store_result($stmt2);
-                           
+                            $result2 = mysqli_stmt_get_result($stmt2);
+                            $total = mysqli_num_rows($result2);
                            
                          ?>
                          <div id="jumlah">Ditemukan <?php echo $total ?> hasil dari pencarian</div>
@@ -211,14 +180,8 @@
                          ?>
                          <div class="clear"></div>
                             <?php 
-                            $stmt = mysqli_prepare($mysqli, $query) or die(mysqli_error($mysqli));
-
-                            mysqli_stmt_bind_param($stmt, "sssss", $pencarian, $pencarian, $pencarian, $provinsi, $kategori) or die(mysqli_error($mysqli));
-
-                            mysqli_stmt_execute($stmt) or die(mysqli_error($mysqli));;
-                            $stmt->bind_result($id_topik, $title, $gambar1, $gambar2, $isi);  // <-- one param for each field returned
-                            while ($stmt->fetch()) {
-                                $id= $id_topik;
+                                while($data = mysqli_fetch_array($result))
+                                {
                                     /*if($_SESSION['halaman-pencarian']-1 == ($_SESSION['total-pencarian']-1)/5)
                                     {*/
                                     //echo '<a href="rincian.php?id='.$data['id_topik'].'>';
@@ -227,13 +190,13 @@
 
                                 
 
-                                <a href="pages.php?id=<?php echo $id ?>">
-                                    <img src="<?php if(isset($gambar1)){ echo "image/".$gambar1;} else if(isset($gambar2)){echo image/$gambar2;} else echo 'image/no-image.jpg' ?>" title="<?php echo $title; ?>" width="150" heigth="300">
+                                <a href="pages.php?id=<?php echo $data['id_topik'] ?>">
+                                    <img src="<?php if(isset($data['gambar1'])){ echo "image/".$data['gambar1'];} else if(isset($data['gambar2'])){echo image/$data['gambar2'];} else echo 'image/no-image.jpg' ?>" title="<?php echo $data['title']; ?>" width="150" heigth="300">
 
 
                                     <p>
                                         <?php
-                                            echo $isi;
+                                            echo $data['isi'];
                                         ?>
                                         <!-- Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,

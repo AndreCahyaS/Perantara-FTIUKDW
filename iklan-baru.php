@@ -80,7 +80,7 @@ CURRENT_TIMESTAMP , '".$kategori."', '".$username."', '".$nego."', '".$kondisi."
     }
             
 
-    mysql_close($koneksi);
+   
 ?>
 
 <!DOCTYPE html>
@@ -101,7 +101,7 @@ CURRENT_TIMESTAMP , '".$kategori."', '".$username."', '".$nego."', '".$kondisi."
                 <div id="header" class="grid_24">
 
                     <div id="banner" class="grid_18">
-                        <a href="index.php"> <img src="banner.jpeg" height="200" width="600"></a>
+                        <a href="index.php"> <img src="banner.jpeg" height="100" width="600"></a>
                     </div>
 
 
@@ -112,10 +112,10 @@ CURRENT_TIMESTAMP , '".$kategori."', '".$username."', '".$nego."', '".$kondisi."
                                      {
                                         $username = $_SESSION['user'];
                                          ?>
-                                        <h3>Hello ,<a href="halamansaya.php"><?php echo $username; ?></a></h3>
+                                        <h3>Hello,<a href="halamansaya.php"><?php echo $username; ?></a></h3>
 
-                                
                                  <a href="logout.php"> <button>Logout</button></a>
+                                  <a href="iklan-baru.php"><input type="submit" value="Buat Iklan Baru"></a>
                                 <?php
                                         }
                                         else {
@@ -245,13 +245,17 @@ CURRENT_TIMESTAMP , '".$kategori."', '".$username."', '".$nego."', '".$kondisi."
                      
 
                 </div>
-
+<?php
+mysqli_close($mysqli);
+mysql_close($koneksi);
+?>
                  <div id="footer" class="grid_24">
                         
                                     <ul>
-                                            <li><a href="#" class="grid_4"><strong>Disclaimer</strong></a></li>
-                                            <li><a href="#" class="grid_4"><strong>Petunjuk</strong></a></li>
-                                            <li><a href="#" class="grid_4"><strong>ABOUT US</strong></a></li>
+                                            
+                                            <li><a href="ketentuan.php" class="grid_4"><strong>Ketentuan</strong></a></li>
+                                            <li><a href="petunjuk.php" class="grid_4"><strong>Petunjuk</strong></a></li>
+                                            <li><a href="tentang-kami.php" class="grid_4"><strong>ABOUT US</strong></a></li>
                                     </ul>
                     
                     </div>

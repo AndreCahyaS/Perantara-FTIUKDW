@@ -16,7 +16,7 @@
                 	<div id="header" class="grid_24">
                       <a href="index.php">
                 		  <div id="banner" class="grid_18">
-                        <a href="index.php"> <img src="banner.jpeg" height="100" width="600"></a>
+                             <a href="index.php"> <img src="banner.jpeg" height="100" width="600"></a>
                       </div>
                       </a>
 
@@ -55,14 +55,8 @@
 
                   
                   <div id="content" class="grid_24">
-                  <div id="petunjuk" class="grid_18">
-                    <p></pre>About Us<br>
-<br>
-Sekilas Tentang Perantara<br>
-<br>
-Perantara adalah situs penyedia jasa jual beli online di Indonesia.<br>
-<br>
-Perantara adalah tempat yang sangat tepat bagi siapa saja untuk mencari barang baru maupun bekas berkualitas seperti produk handphone murah, komputer, fashion, mobil, motor, rumah dan properti, alat olahraga, peralatan rumah tangga, dan juga hewan peliharaan. Untuk para penjual, pasang iklan gratis adalah salah satu layanan yang disediakan oleh Perantara. Iklan anda akan dilihat oleh ratusan ribu orang setiap harinya. Bertransaksi di Perantara, baik jual maupun belu tidak dikenakan biaya, semuanya gratis. Ayo bergabunglah sekarang juga bersama jutaan member lain yang sudah terdaftar.<br><br>
+                  <div id="isi" class="grid_18">
+                    <p></pre>
 </pre></p>
                 
                                
