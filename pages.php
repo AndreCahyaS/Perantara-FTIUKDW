@@ -122,10 +122,22 @@
                              </div>
                              <?php
                            }
-                        } else //if(!$data=mysqli_fetch_array($result)) {
-                          echo "<h1>Maaf Post tidak ada</h1>";
-                        //}
+                        
 
+                           $id = $_GET['id'];
+                            $query = "SELECT * FROM topik WHERE id_topik=?";
+                           
+
+                             $stmt = mysqli_prepare($mysqli, $query);
+
+                            mysqli_stmt_bind_param($stmt, 'i', $id) or die(mysqli_error);
+                            mysqli_stmt_execute($stmt);
+                            
+                            mysqli_stmt_store_result($stmt);
+                      if(!(mysqli_stmt_num_rows($stmt) === 1)) {
+                        echo "<h1>Maaf Post tidak ada</h1>";
+                        }
+}
                              ?>
                                         
                     </div>
