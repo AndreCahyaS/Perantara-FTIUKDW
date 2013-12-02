@@ -16,7 +16,7 @@
                 	<div id="header" class="grid_24">
                       <a href="index.php">
                 		  <div id="banner" class="grid_18">
-                                   <img src="banner.jpeg" height="200" width="600">
+                                   <img src="banner.png" height="200" width="600">
                       </div>
                       </a>
 
