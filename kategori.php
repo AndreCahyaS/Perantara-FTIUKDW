@@ -17,7 +17,7 @@
                 <div id="header" class="grid_24">
 
                           <div id="banner" class="grid_18">
-                                  <a href="index.php"> <img src="banner.jpeg" height="100" width="600"></a>
+                                  <a href="index.php"> <img src="banner.png" height="100" width="600"></a>
                       </div>
 
                           <div id="masuk" class="grid_5">
@@ -31,7 +31,7 @@
                                  ?>
                                  <h3>Hello ,<a href="halamansaya.php"><?php echo $username; ?></a></h3>
 
-                                 <a href="logout.php"> <button>Logout</button></a>
+                                 <a href="logout.php"> <button>Keluar</button></a>
                                   <a href="iklan-baru.php"><input type="submit" value="Buat Iklan Baru"></a>
                                 <?php
                                         }
@@ -128,7 +128,7 @@
                         else $noPage = 1;
                         $offset = ($noPage - 1) * $dataPerPage;
                 
-                         if(isset($_GET['provinsi']) || isset($_GET['pencarian']))
+                         if(isset($_GET['kategori']))
                          {
 
                           $kategori = $_GET['kategori'];
@@ -136,7 +136,7 @@
                          
 
                           
-                                $query = "SELECT * FROM topik WHERE kategori LIKE ? LIMIT $offset, $dataPerPage";
+                                $query = "SELECT `id_topik`, `title`, `gambar1`, `gambar2`, `isi` FROM topik WHERE kategori LIKE ? LIMIT $offset, $dataPerPage";
                                 $query2 = "SELECT * FROM topik WHERE kategori LIKE ?";
                                
 
@@ -144,12 +144,13 @@
                             $stmt2 = mysqli_prepare($mysqli, $query2) or die(mysqli_error($mysqli));
 
                             mysqli_stmt_bind_param($stmt2, "s", $kategori) or die(mysqli_error($mysqli));
-                            mysqli_stmt_execute($stmt2) or die(mysqli_error($mysqli));;
-                            $total =  mysqli_stmt_store_result($stmt2);
+                            mysqli_stmt_execute($stmt2) or die(mysqli_error($mysqli));
+                            mysqli_stmt_store_result($stmt2) or die(mysqli_error($mysqli));
+                            $total = $stmt2->num_rows;
                            
                            
                          ?>
-                         <div id="jumlah">Ditemukan <?php echo $total ?> hasil dari pencarian</div>
+                         <div id="jumlah">Ditemukan <?php echo $total; ?> hasil dari pencarian</div>
                          <?php 
                          $jumPage = ceil($total/$dataPerPage);
                          if ($noPage > 1) echo  "<a href='".$_SERVER['PHP_SELF']."?page=".($noPage-1)."'>&lt;&lt; Prev</a>";
@@ -172,7 +173,7 @@
 
                             mysqli_stmt_bind_param($stmt, "s", $kategori) or die(mysqli_error($mysqli));
 
-                            mysqli_stmt_execute($stmt) or die(mysqli_error($mysqli));;
+                            mysqli_stmt_execute($stmt) or die(mysqli_error($mysqli));
                             $stmt->bind_result($id_topik, $title, $gambar1, $gambar2, $isi);  // <-- one param for each field returned
                             while ($stmt->fetch()) {
                                 $id= $id_topik;
@@ -223,7 +224,7 @@ mysql_close($koneksi);
                                     <ul>
                                             <li><a href="ketentuan.php" class="grid_4"><strong>Ketentuan</strong></a></li>
                                             <li><a href="petunjuk.php" class="grid_4"><strong>Petunjuk</strong></a></li>
-                                            <li><a href="tentang-kami.php" class="grid_4"><strong>ABOUT US</strong></a></li>
+                                            <li><a href="tentang-kami.php" class="grid_4"><strong>Tentang Kami</strong></a></li>
                                     </ul>
                     
                     </div>

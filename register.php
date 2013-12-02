@@ -1,6 +1,6 @@
 <?php
     include("koneksi.php");
-
+    $hasil;
     //masukkan ke data base form sign up
     //cek dulu apa ada data yang dikirim
 
@@ -23,9 +23,9 @@
          mysqli_stmt_bind_param($stmt, "sss", $username, $nama, $email);
           $res = mysqli_stmt_execute($stmt);
     
-        if($res) { echo "Berhasil ditambah";
+        if($res) { $hasil =  "Berhasil ditambah";
 }
-        else echo("gagal tambah");
+        else $hasil = "Ada sesuatu yang salah, harap coba lagi";
 
     }
     else if(isset($_POST['username']) || isset($_POST['nama']) || isset($_POST['email']) ||  isset($_POST['password']))
@@ -54,7 +54,7 @@
                     <div id="header" class="grid_24">
 
                           <div id="banner" class="grid_18">
-                                  <a href="index.php"> <img src="banner.jpeg" height="100" width="600"></a>
+                                  <a href="index.php"> <img src="banner.png" height="100" width="600"></a>
                       </div>
 
                           <div id="masuk" class="grid_5">
@@ -95,6 +95,7 @@
                   <div id="content" class="grid_24">
                     
                     <form id="daftar" method="POST" class="grid_17" action="register.php"> 
+                      <?php echo $hasil; ?>
                         <div id="kiri" >
 
                         <table>                
@@ -143,7 +144,7 @@
                                     <ul>
                                             <li><a href="ketentuan.php" class="grid_4"><strong>Ketentuan</strong></a></li>
                                             <li><a href="petunjuk.php" class="grid_4"><strong>Petunjuk</strong></a></li>
-                                            <li><a href="tentang-kami.php" class="grid_4"><strong>ABOUT US</strong></a></li>
+                                            <li><a href="tentang-kami.php" class="grid_4"><strong>Tentang Kami</strong></a></li>
                                     </ul>
                     
                     </div>

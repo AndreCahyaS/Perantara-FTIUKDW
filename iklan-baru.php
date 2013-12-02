@@ -89,9 +89,9 @@ CURRENT_TIMESTAMP , '".$kategori."', '".$username."', '".$nego."', '".$kondisi."
 
 <!DOCTYPE html>
 <html>
-<title>-perantara.com</title>
+
         <head>
-                  
+                  <title>Buat Iklan</title>
                 <script type="text/javascript" src="jquery-1.10.2.js"></script>
                 <link rel="stylesheet" href="css/960_24_col.css" type="text/css"/>
                 <link rel="stylesheet" href="css/iklan-baru.css" type="text/css"/>
@@ -105,7 +105,7 @@ CURRENT_TIMESTAMP , '".$kategori."', '".$username."', '".$nego."', '".$kondisi."
                 <div id="header" class="grid_24">
 
                     <div id="banner" class="grid_18">
-                        <a href="index.php"> <img src="banner.jpeg" height="100" width="600"></a>
+                        <a href="index.php"> <img src="banner.png" height="100" width="600"></a>
                     </div>
 
 
@@ -118,7 +118,7 @@ CURRENT_TIMESTAMP , '".$kategori."', '".$username."', '".$nego."', '".$kondisi."
                                          ?>
                                         <h3>Hello,<a href="halamansaya.php"><?php echo $username; ?></a></h3>
 
-                                 <a href="logout.php"> <button>Logout</button></a>
+                                 <a href="logout.php"> <button>Keluar</button></a>
                                   <a href="iklan-baru.php"><input type="submit" value="Buat Iklan Baru"></a>
                                 <?php
                                         }
@@ -223,7 +223,7 @@ CURRENT_TIMESTAMP , '".$kategori."', '".$username."', '".$nego."', '".$kondisi."
                                           </select></td>
                             </tr>
                             <tr>
-                                <td>deskripsi : </td> <td><input type="text" name="deskripsi"></td>
+                                <td>deskripsi : </td> <td><input type="text" name="deskripsi" style="width: 300px; height: 300px; padding: 2px; border: 1px solid black"></td>
                             </tr>
                             <tr>
                                 <td>Gambar 1 : </td><td><input type="file" name="gambar1"></td>
@@ -259,7 +259,7 @@ mysql_close($koneksi);
                                             
                                             <li><a href="ketentuan.php" class="grid_4"><strong>Ketentuan</strong></a></li>
                                             <li><a href="petunjuk.php" class="grid_4"><strong>Petunjuk</strong></a></li>
-                                            <li><a href="tentang-kami.php" class="grid_4"><strong>ABOUT US</strong></a></li>
+                                            <li><a href="tentang-kami.php" class="grid_4"><strong>Tentang Kami</strong></a></li>
                                     </ul>
                     
                     </div>

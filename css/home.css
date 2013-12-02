@@ -73,5 +73,15 @@
 }
 
 #barang {
-	height : 1000px;
+	height : 800px;
+}
+.kategori {
+    margin: 10px;
+    border : solid lightblue 1px;
+    opacity: 0.8;
+}
+.kategori:hover { 
+    margin: 15px;
+    border: solid blue 2px;
+    opacity: 1;
 }

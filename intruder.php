@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
         <head>
-               
+               <title>Masalah</title>
         
                 <script type="text/javascript" src="jquery-1.10.2.js"></script>
                 <link rel="stylesheet" href="css/960_24_col.css" type="text/css"/>
@@ -16,7 +16,7 @@
                 	<div id="header" class="grid_24">
 
                 		  <div id="banner" class="grid_18">
-                                 <a href="index.php"> <img src="banner.jpeg" height="100" width="600"></a>
+                                 <a href="index.php"> <img src="banner.png" height="100" width="600"></a>
                       </div>
 
                           <div id="masuk" class="grid_5">

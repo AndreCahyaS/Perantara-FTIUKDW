@@ -27,13 +27,14 @@ VALUES (NULL , ?, ?, NOW( ), ?)";
 ?><!DOCTYPE html>
 
         <head>
-               
+               <title>Iklan - Perantara</title>
         
                 <script type="text/javascript" src="jquery-1.10.2.js"></script>
                 <link rel="stylesheet" href="css/960_24_col.css" type="text/css"/>
                 <link rel="stylesheet" href="css/home.css" type="text/css"/>
                 <link rel="stylesheet" href="css/headerfooter.css" type="text/css"/>
                 <link rel="stylesheet" href="css/pages.css" type="text/css"/>
+
                 <meta charset="utf-8">
 
         </head>
@@ -43,7 +44,7 @@ VALUES (NULL , ?, ?, NOW( ), ?)";
                   <div id="header" class="grid_24">
 
                       <div id="banner" class="grid_18">
-                                  <a href="index.php"> <img src="banner.jpeg" height="100" width="600"></a>
+                                  <a href="index.php"> <img src="banner.png" height="100" width="600"></a>
                       </div>
 
                           <div id="masuk" class="grid_5">
@@ -55,7 +56,7 @@ VALUES (NULL , ?, ?, NOW( ), ?)";
                                  ?>
                                  <h3>Hello,<a href="halamansaya.php"><?php echo $username; ?></a></h3>
 
-                                 <a href="logout.php"> <button>Logout</button></a>
+                                 <a href="logout.php"> <button>Keluar</button></a>
                                   <a href="iklan-baru.php"><input type="submit" value="Buat Iklan Baru"></a>
                                 <?php
                                         }
@@ -99,16 +100,17 @@ VALUES (NULL , ?, ?, NOW( ), ?)";
                             ?>
                              <div id="kiri" class="grid_17">
                                 <div class="grid_7 gambar">
-                               <img src="image/<?php echo $gambar1; $user = $username; ?>" width="150" height="200">  
+                               <img src="image/<?php echo $gambar1; $user = $username; ?>" width="230" height="200">  
                                 </div>
                                 <div  class="grid_7 gambar">
-                                  <img src="image/<?php echo $gambar2; ?>" width="150" heigth="200">  
+                                  <img src="image/<?php echo $gambar2; ?>" width="230" height="200">  
                                 </div>
                                 <?php $harga2 = $harga; ?>
                                  <div  class="grid_16 deskripsi">
                                   <h1>Deskripsi Barang :</h1>
                                   <p><?php echo $isi; ?> </p>
                                 </div>
+                                <h1>Komentar :</h1>
                                 <?php
                               }
                                  $query2 = "SELECT `isi`, `username`, `tanggal` FROM komen WHERE id_topik= ?";
@@ -123,11 +125,11 @@ VALUES (NULL , ?, ?, NOW( ), ?)";
                                 
                             ?>
 
-                            <div class="komentar grid_17">
+                            <div class="komentar grid_14">
                                   <div class="komentar_user grid_5"><?php echo $username;?>
                                   </div> 
                                   <div class="tanggal grid_5"><?php echo $tanggal; ?> </div>
-                                  <div class="isi grid_16">
+                                  <div class="isi grid_12">
                                   <p><?php echo $isi; ?></p>
                                 </div>
                             </div>
@@ -135,10 +137,11 @@ VALUES (NULL , ?, ?, NOW( ), ?)";
                             }
 
                                        if(isset($_SESSION['user'])) {
-                            ?><div id="komen" class="grid_14">
-                              <form id="komen" method="post" action="pages.php?id=<?php echo $id; ?>">
-                              <label>Komentar : </label><input type="text" name="isikomen"></input><br>
-                              <input type="submit" value="submit komentar">
+                            ?><div id="komen1" class="grid_14">
+                            
+                              <form id="komen" class="asd" method="post" action="pages.php?id=<?php echo $id; ?>">
+                              <label>Komentar : </label><input type="text" name="isikomen" class="asd" style="width: 300px; height: 100px; padding: 2px; border: 1px solid black"></input><br>
+                              <input type="submit" value="submit komentar" class="asd">
                                                           </form>
                                                         </div>
                             <?php 
@@ -211,7 +214,7 @@ VALUES (NULL , ?, ?, NOW( ), ?)";
                                     <ul>
                                             <li><a href="ketentuan.php" class="grid_4"><strong>Ketentuan</strong></a></li>
                                             <li><a href="petunjuk.php" class="grid_4"><strong>Petunjuk</strong></a></li>
-                                            <li><a href="tentang-kami.php" class="grid_4"><strong>ABOUT US</strong></a></li>
+                                            <li><a href="tentang-kami.php" class="grid_4"><strong>Tentang Kami</strong></a></li>
                                     </ul>
                     
                     </div>

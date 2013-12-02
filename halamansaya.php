@@ -42,7 +42,7 @@ if(isset($_POST['nama']) && isset($_POST['email']) && isset($_POST['telpon'])) {
 
 <html>
 <head>
-	<title>Perantara - Tempat Menyenangkan Untuk Jual Beli Online</title>
+	<title>Halaman Saya - Perantara</title>
 
 	<meta name="description" content"jual beli jualbeli iklan postiklan gratis iklangratis">
 	<meta charset="UTF-8">
@@ -58,7 +58,7 @@ if(isset($_POST['nama']) && isset($_POST['email']) && isset($_POST['telpon'])) {
 		<div id="header" class="grid_24">
 
                 <div id="banner" class="grid_18">
-                    <a href="index.php"> <img src="banner.jpeg" height="100" width="600"></a>
+                    <a href="index.php"> <img src="banner.png" height="100" width="600"></a>
                 </div>
                 <div id="masuk" class="grid_5">
                                 <?php
@@ -69,7 +69,7 @@ if(isset($_POST['nama']) && isset($_POST['email']) && isset($_POST['telpon'])) {
                                          ?>
                                        <h3>Hello,<a href="halamansaya.php"><?php echo $username; ?></a></h3>
 
-                                 <a href="logout.php"> <button>Logout</button></a>
+                                 <a href="logout.php"> <button>Keluar</button></a>
                                   <a href="iklan-baru.php"><input type="submit" value="Buat Iklan Baru"></a>
                                 <?php
                                         }
@@ -188,7 +188,7 @@ if(isset($_POST['nama']) && isset($_POST['email']) && isset($_POST['telpon'])) {
                          
                                             <li><a href="ketentuan.php" class="grid_4"><strong>Ketentuan</strong></a></li>
                                             <li><a href="petunjuk.php" class="grid_4"><strong>Petunjuk</strong></a></li>
-                                            <li><a href="tentang-kami.php" class="grid_4"><strong>ABOUT US</strong></a></li>
+                                            <li><a href="tentang-kami.php" class="grid_4"><strong>Tentang Kami</strong></a></li>
                       </ul>
                 
             </div>

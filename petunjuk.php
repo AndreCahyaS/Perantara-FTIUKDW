@@ -2,7 +2,7 @@
 
         <head>
                
-        
+                <title>Petunjuk</title>
                 <script type="text/javascript" src="jquery-1.10.2.js"></script>
                 <link rel="stylesheet" href="css/960_24_col.css" type="text/css"/>
                 <link rel="stylesheet" href="css/home.css" type="text/css"/>
@@ -16,7 +16,7 @@
                 	<div id="header" class="grid_24">
                       <a href="index.php">
                 		  <div id="banner" class="grid_18">
-                                   <a href="index.php"> <img src="banner.jpeg" height="100" width="600"></a>
+                                   <a href="index.php"> <img src="banner.png" height="100" width="600"></a>
                       </div>
                       </a>
 
@@ -32,7 +32,7 @@
                                  ?>
                                  <h3>Hello,<a href="halamansaya.php"><?php echo $username; ?></a></h3>
 
-                                 <a href="logout.php"> <button>Logout</button></a>
+                                 <a href="logout.php"> <button>Keluar</button></a>
                                   <a href="iklan-baru.php"><input type="submit" value="Buat Iklan Baru"></a>
                                 <?php
                                         }
@@ -178,7 +178,7 @@ mysql_close($koneksi);
                                     <ul>
                                             <li><a href="ketentuan.php" class="grid_4"><strong>Ketentuan</strong></a></li>
                                             <li><a href="petunjuk.php" class="grid_4"><strong>Petunjuk</strong></a></li>
-                                            <li><a href="tentang-kami.php" class="grid_4"><strong>ABOUT US</strong></a></li>
+                                            <li><a href="tentang-kami.php" class="grid_4"><strong>Tentang Kami</strong></a></li>
                                     </ul>
                     
                     </div>

@@ -12,3 +12,19 @@
 	margin: 10px;
 	border: 1px solid blue;
 }
+.komentar { 
+	background : rgb(100,100,100);
+	border : 1px black solid;
+	margin : 10px;
+	padding : 3px;
+}
+
+.gambar {
+	height: 240px;
+}
+#komen {
+	margin : 10px;
+}
+.asd {
+	margin : 10px;
+}

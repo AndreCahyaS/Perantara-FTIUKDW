@@ -144,3 +144,7 @@ html
   background-color: blue;
   opacity: 0.4;
 }
+
+#petunjuk {
+  border : orange 1px solid;
+}

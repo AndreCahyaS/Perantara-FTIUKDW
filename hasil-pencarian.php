@@ -17,7 +17,7 @@
                 <div id="header" class="grid_24">
 
                           <div id="banner" class="grid_18">
-                                  <a href="index.php"> <img src="banner.jpeg" height="100" width="600"></a>
+                                  <a href="index.php"> <img src="banner.png" height="100" width="600"></a>
                       </div>
 
                           <div id="masuk" class="grid_5">
@@ -31,7 +31,7 @@
                                  ?>
                                  <h3>Hello ,<a href="halamansaya.php"><?php echo $username; ?></a></h3>
 
-                                 <a href="logout.php"> <button>Logout</button></a>
+                                 <a href="logout.php"> <button>Keluar</button></a>
                                   <a href="iklan-baru.php"><input type="submit" value="Buat Iklan Baru"></a>
                                 <?php
                                         }
@@ -188,8 +188,8 @@
 
                             mysqli_stmt_bind_param($stmt2, "sssss", $pencarian, $pencarian, $pencarian, $provinsi, $kategori) or die(mysqli_error($mysqli));
                             mysqli_stmt_execute($stmt2) or die(mysqli_error($mysqli));;
-                            $total =  mysqli_stmt_store_result($stmt2);
-                           
+                            mysqli_stmt_store_result($stmt2) or die(mysqli_error($mysqli));
+                            $total = $stmt2->num_rows;
                            
                          ?>
                          <div id="jumlah">Ditemukan <?php echo $total ?> hasil dari pencarian</div>
@@ -266,7 +266,7 @@ mysql_close($koneksi);
                                     <ul>
                                             <li><a href="#" class="grid_4"><strong>Ketentuan</strong></a></li>
                                             <li><a href="#" class="grid_4"><strong>Petunjuk</strong></a></li>
-                                            <li><a href="#" class="grid_4"><strong>ABOUT US</strong></a></li>
+                                            <li><a href="#" class="grid_4"><strong>Tentang Kami</strong></a></li>
                                     </ul>
                     
                     </div>
