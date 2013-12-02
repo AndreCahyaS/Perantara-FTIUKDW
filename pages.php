@@ -1,4 +1,28 @@
-<!DOCTYPE html>
+<?php
+include("koneksi.php");
+session_start();
+
+if(isset($_POST['isikomen']) && isset($_GET['id']) && isset($_SESSION['user'])) {
+  $isikomen = $_POST['isikomen'];
+  $id = $_GET['id'];
+  $username = $_SESSION['user'];
+       $query = "INSERT INTO `u957988429_a`.`komen` (`id_komen` ,`id_topik` ,`isi` ,`tanggal`, `username`)
+VALUES (NULL , ?, ?, NOW( ), ?)";
+
+         $stmt = mysqli_prepare($mysqli, $query);
+
+         mysqli_stmt_bind_param($stmt, "sss", $id, $isikomen, $username);
+          $res = mysqli_stmt_execute($stmt);
+    
+        if($res) { header("LOCATION:".$_SERVER['HTTP_REFERER']."");
+}
+        else echo("gagal tambah");
+
+
+
+}
+
+?><!DOCTYPE html>
 
         <head>
                
@@ -22,8 +46,6 @@
 
                           <div id="masuk" class="grid_5">
                                  <?php
-                                    include("koneksi.php");
-                                    session_start();
                                     if(isset($_SESSION['user']))
                                      {
                                         $username = $_SESSION['user'];
@@ -83,7 +105,42 @@
                                   <h1>Deskripsi Barang :</h1>
                                   <p><?php echo $data['isi']; ?> </p>
                                 </div>
+                                <?php
+                                $query2 = "SELECT * FROM komen WHERE id_topik=?";
+                           
 
+                             $stmt2 = mysqli_prepare($mysqli, $query2);
+                            mysqli_stmt_bind_param($stmt2, 'i', $id) or die(mysqli_error);
+                            mysqli_stmt_execute($stmt2);
+                            $result2 = mysqli_stmt_get_result($stmt2);
+
+                                while($data2=mysqli_fetch_array($result2))
+                                { 
+                            ?>
+
+                            <div class="komentar grid_17">
+                                  <div class="komentar_user grid_5"><?php echo $data2['username'];?>
+                                  </div> 
+                                  <div class="tanggal grid_5"><?php echo "".$data2['tanggal'].""; ?> </div>
+                                  <div class="isi grid_16">
+                                  <p><?php echo $data2['isi']; ?></p>
+                                </div>
+                            </div>
+                            <?php
+                            }
+
+                                       if(isset($_SESSION['user'])) {
+                            ?>
+                              <form id="komen" method="post" action="pages.php?id=<?php echo $id; ?>">
+                              <label>Komentar : </label><input type="text" name="isikomen"></input><br>
+                              <input type="submit" value="submit komentar">
+                                                          </form>
+                            <?php 
+                            }
+                      
+
+
+                                ?>
                              </div>
                              <div id="kanan" class="grid_6">
                                 <div id="kontak" class="grid_5">
@@ -121,6 +178,7 @@
                              </div>
                              </div>
                              <?php
+                      
                            }
                         
 
